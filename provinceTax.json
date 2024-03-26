@@ -1,0 +1,300 @@
+{
+  "provinces": {
+    "1": {
+      "land_transfer_tax": null,
+      "property_registration_tax": {
+        "property_tax": {
+          "tax_brackets": [
+            {
+              "from": 0,
+              "to": null,
+              "rate": 0.0004,
+              "fixed_amt": 50
+            }
+          ]
+        },
+        "mortgage_tax": {
+          "tax_brackets": [
+            {
+              "from": 0,
+              "to": null,
+              "rate": 0.0003,
+              "fixed_amt": 50
+            }
+          ]
+        }
+      }
+    },
+    "2": {
+      "land_transfer_tax": {
+        "tax_brackets": [
+          {
+            "from": 0,
+            "to": 200000,
+            "fixed_amt": 0,
+            "rate": 0.01
+          },
+          {
+            "from": 200000.01,
+            "to": 2000000,
+            "fixed_amt": 2000,
+            "rate": 0.02
+          },
+          {
+            "from": 2000000.01,
+            "to": null,
+            "fixed_amt": 8000,
+            "rate": 0.03
+          }
+        ]
+      },
+      "property_registration_tax": null
+    },
+    "3": {
+      "land_transfer_tax": {
+        "tax_brackets": [
+          {
+            "from": 0,
+            "to": 30000,
+            "fixed_amt": 0,
+            "rate": 0
+          },
+          {
+            "from": 30000.01,
+            "to": 90000,
+            "fixed_amt": 0,
+            "rate": 0.005
+          },
+          {
+            "from": 90000.01,
+            "to": 150000,
+            "fixed_amt": 300,
+            "rate": 0.01
+          },
+          {
+            "from": 150000.01,
+            "to": 200000,
+            "fixed_amt": 900,
+            "rate": 0.015
+          },
+          {
+            "from": 200000.01,
+            "to": null,
+            "fixed_amt": 1650,
+            "rate": 0.02
+          }
+        ]
+      },
+      "property_registration_tax": null
+    },
+    "4": {
+      "land_transfer_tax": {
+        "tax_brackets": [
+          {
+            "from": 0,
+            "to": null,
+            "fixed_amt": 0,
+            "rate": 0.01
+          }
+        ]
+      },
+      "property_registration_tax": null
+    },
+    "5": {
+      "land_transfer_tax": {
+        "tax_brackets": [
+          {
+            "from": 500,
+            "to": null,
+            "fixed_amt": 100,
+            "rate": 0.004
+          }
+        ]
+      },
+      "property_registration_tax": null
+    },
+    "6": {
+      "land_transfer_tax": null,
+      "property_registration_tax": null
+    },
+    "7": {
+      "land_transfer_tax": null,
+      "property_registration_tax": {
+        "property_tax": {
+          "tax_brackets": [
+            {
+              "from": 0,
+              "to": 1000000,
+              "rate": 0.0015,
+              "fixed_amt": 100
+            },
+            {
+              "from": 1000000.01,
+              "to": null,
+              "rate": 0.001,
+              "fixed_amt": 1600
+            }
+          ]
+        },
+        "mortgage_tax": {
+          "tax_brackets": [
+            {
+              "from": 0,
+              "to": null,
+              "rate": 0.001,
+              "fixed_amt": 80
+            }
+          ]
+        }
+      }
+    },
+    "8": {
+      "land_transfer_tax": null,
+      "property_registration_tax": {
+        "property_tax": {
+          "tax_brackets": [
+            {
+              "from": 0,
+              "to": 1000000,
+              "rate": 0.0015,
+              "fixed_amt": 60
+            },
+            {
+              "from": 1000000.01,
+              "to": null,
+              "rate": 0.001,
+              "fixed_amt": 1560
+            }
+          ]
+        },
+        "mortgage_tax": {
+          "tax_brackets": [
+            {
+              "from": 0,
+              "to": null,
+              "rate": 0.001,
+              "fixed_amt": 40
+            }
+          ]
+        }
+      }
+    },
+    "9": {
+      "land_transfer_tax": {
+        "tax_brackets": [
+          {
+            "from": 0,
+            "to": 55000.0,
+            "rate": 0.005,
+            "fixed_amt": 0
+          },
+          {
+            "from": 55000.01,
+            "to": 250000,
+            "rate": 0.01,
+            "fixed_amt": 275
+          },
+          {
+            "from": 250000.01,
+            "to": 400000,
+            "rate": 0.015,
+            "fixed_amt": 2225
+          },
+          {
+            "from": 400000.01,
+            "to": 2000000,
+            "rate": 0.02,
+            "fixed_amt": 4475
+          },
+          {
+            "from": 2000000.01,
+            "to": null,
+            "rate": 0.025,
+            "fixed_amt": 36475
+          }
+        ]
+      },
+      "property_registration_tax": null
+    },
+    "10": {
+      "land_transfer_tax": {
+        "tax_brackets": [
+          {
+            "from": 0,
+            "to": null,
+            "fixed_amt": 0,
+            "rate": 0.01
+          }
+        ]
+      },
+      "property_registration_tax": null
+    },
+    "11": {
+      "land_transfer_tax": {
+        "tax_brackets": [
+          {
+            "from": 0,
+            "to": 53200,
+            "fixed_amt": 0,
+            "rate": 0.005
+          },
+          {
+            "from": 53200.01,
+            "to": 266200,
+            "fixed_amt": 266,
+            "rate": 0.01
+          },
+          {
+            "from": 266200.01,
+            "to": null,
+            "fixed_amt": 2396,
+            "rate": 0.015
+          }
+        ]
+      },
+      "property_registration_tax": null
+    },
+    "12": {
+      "land_transfer_tax": null,
+      "property_registration_tax": {
+        "property_tax": {
+          "tax_brackets": [
+            {
+              "from": 0,
+              "to": 500,
+              "rate": 0.0,
+              "fixed_amt": 0
+            },
+            { "from": 501, "to": 8400, "rate": 0.0, "fixed_amt": 25 },
+            {
+              "from": 8401,
+              "to": null,
+              "rate": 0.003,
+              "fixed_amt": 25
+            }
+          ]
+        },
+        "mortgage_tax": null
+      }
+    },
+    "13": {
+      "land_transfer_tax": {
+        "tax_brackets": [
+          {
+            "from": 0,
+            "to": 100000,
+            "rate": 0,
+            "fixed_amt": 50
+          },
+          {
+            "from": 100000.01,
+            "to": 10000000,
+            "rate": 0,
+            "fixed_amt": 650
+          }
+        ]
+      },
+      "property_registration_tax": null
+    }
+  }
+}
