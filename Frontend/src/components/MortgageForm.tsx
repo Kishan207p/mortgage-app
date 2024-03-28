@@ -1,5 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
+interface Province {
+  province_id: number;
+  code: string;
+  description: string;
+}
+
+interface City {
+  city_id: number;
+  description: string;
+}
 interface MortgageFormProps {
   principal: number;
   interestRate: number;
@@ -38,6 +49,42 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
   inputsDisabled,
 }) => {
   const [showExtraFields, setShowExtraFields] = useState(false);
+  const [provinces, setProvinces] = useState<Province[]>([]);
+  const [cities, setCities] = useState<City[]>([]);
+  const [selectedProvince, setSelectedProvince] = useState<number | null>(null);
+
+  useEffect(() => {
+    // Fetch provinces from backend API
+    axios
+      .get<Province[]>("http://localhost:5000/api/provinces")
+      .then((response) => {
+        setProvinces(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching provinces:", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (selectedProvince !== null) {
+      // Fetch cities for the selected province from backend API
+      axios
+        .get<City[]>(`http://localhost:5000/api/cities/${selectedProvince}`)
+        .then((response) => {
+          setCities(response.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching cities:", error);
+        });
+    }
+  }, [selectedProvince]);
+
+  const handleProvinceChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    const provinceId = parseInt(event.target.value);
+    setSelectedProvince(provinceId);
+  };
 
   return (
     <div className="mortgage-form">
@@ -102,6 +149,30 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
           <option value="$">$</option>
         </select>
       </div>
+
+      <label>Province:</label>
+      <select
+        value={selectedProvince ?? ""}
+        onChange={handleProvinceChange}
+        disabled={inputsDisabled}
+      >
+        <option value="">Select Province</option>
+        {provinces.map((province) => (
+          <option key={province.province_id} value={province.province_id}>
+            {province.description}
+          </option>
+        ))}
+      </select>
+
+      <label>City:</label>
+      <select disabled={!selectedProvince || inputsDisabled}>
+        <option value="">Select City</option>
+        {cities.map((city) => (
+          <option key={city.city_id} value={city.city_id}>
+            {city.description}
+          </option>
+        ))}
+      </select>
 
       {showExtraFields && (
         <>
