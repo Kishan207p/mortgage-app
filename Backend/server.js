@@ -13,19 +13,10 @@ const PORT = 5000;
 app.use(cors());
 app.use(express.json());
 
-dotenv.config(); // Load environment variables from .env file
+dotenv.config(); 
 
 const mongoURI = process.env.MONGO_URI;
 const dbName = process.env.DB_NAME;
-
-// mongoose.connect("mongodb+srv://stuart207j:kishan2001@cluster0.hahprlw.mongodb.net/mortgage");
-
-
-// app.use(express.json());
-// app.use(cors()); // Enable CORS for all routes
-
-
-// // Connect to MongoDB
 
 
 if (!mongoURI || !dbName) {
@@ -50,9 +41,19 @@ app.get("/api/provinces", async (req, res) => {
   }
 });
 
+app.get("/api/cities", async (req, res) => {
+  try {
+    const cities = await CityModel.find();
+    res.json(cities);
+  } catch (error) {
+    console.error("Error fetching provinces:", error);
+    res.status(500).json({ error: "Failed to fetch provinces" });
+  }
+});
+
 app.get("/api/cities/:province_id", async (req, res) => {
   let { province_id } = req.params;
-  // Parse provinceId as a number
+
   province_id = parseInt(province_id);
   
   try {
