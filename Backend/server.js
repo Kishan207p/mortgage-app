@@ -55,7 +55,6 @@ app.get("/api/cities/:province_id", async (req, res) => {
   let { province_id } = req.params;
 
   province_id = parseInt(province_id);
-  
   try {
     const cities = await CityModel.find({ province_id: province_id });
     res.json(cities);

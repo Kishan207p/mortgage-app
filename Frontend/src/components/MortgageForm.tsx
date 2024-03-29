@@ -82,6 +82,8 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
   const handleProvinceChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
+    console.log(event.target.value);
+
     const provinceId = parseInt(event.target.value);
     setSelectedProvince(provinceId);
   };
