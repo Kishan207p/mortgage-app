@@ -3,7 +3,6 @@
 /*This is a copy of PDFUpload.tsx. This is fetching types from MongoDB.*/
 
 import React, { useState, useEffect } from "react";
-import "../styles/PDF.css";
 interface PDFUploadProps {
   // Add any props if needed
 }
@@ -127,7 +126,6 @@ const PDFUpload: React.FC<PDFUploadProps> = () => {
     <div className="flex">
       <div className="w-full">
         <div className="max-h-[600px] overflow-y-auto pr-4">
-          
           {/* Limit height and make it scrollable */}
           {pdfFiles.map((pdf, index) => (
             <div key={index} className="flex mb-4">
