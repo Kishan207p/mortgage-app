@@ -8,8 +8,9 @@ import HomePage from './pages/HomePage'
 import './App.css'
 import ContactUsPage from './pages/ContactUsPage';
 import AboutUsPage from './pages/AboutUsPage'
+import PDFUploadPage from './pages/PDFUploadPage';
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <Router>
       <div className="flex h-screen">
@@ -23,6 +24,7 @@ const App = () => {
             <Route path="/comparison" element={<ComparisonPage />} />
             <Route path="/contactus" element={<ContactUsPage />} />
             <Route path="/aboutus" element={<AboutUsPage />} />
+            <Route path="/pdf" element={<PDFUploadPage />} />
           </Routes>
         </div>
       </div>

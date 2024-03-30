@@ -79,8 +79,21 @@ const SideBar = () => {
             }`
           }
         >
-          <HiNewspaper className="mr-2" /> News
+        <HiNewspaper className="mr-2" /> News
         </NavLink>
+        <NavLink
+          to="/pdf"
+          className={({ isActive }) =>
+            `flex items-center block px-4 py-2 ${
+              isActive
+                ? "bg-gray-800 text-gray-400"
+                : "text-white hover:bg-gray-800"
+            }`
+          }
+        >
+        <HiNewspaper className="mr-2" /> PDF Upload
+        </NavLink>
+        
         <NavLink
           to="/aboutus"
           className={({ isActive }) =>

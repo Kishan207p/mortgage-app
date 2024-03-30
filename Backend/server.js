@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const dotenv = require('dotenv');
 const ProvinceModel = require("./models/ProvinceModel");
 const CityModel = require("./models/CityModel");
+const DocumentTypeModel = require("./models/DocumentTypes");
 
 const app = express();
 const PORT = 5000;
@@ -64,6 +65,15 @@ app.get("/api/cities/:province_id", async (req, res) => {
   }
 });
 
+app.get("/api/documents", async (req, res) => {
+  try {
+    const documentTypes = await DocumentTypeModel.find();
+    res.json({ documentTypes });
+  } catch (error) {
+    console.error("Error fetching document types:", error);
+    res.status(500).json({ error: "Failed to fetch document types" });
+  }
+});
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
