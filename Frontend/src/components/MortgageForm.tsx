@@ -7,10 +7,16 @@ interface Province {
   description: string;
 }
 
+interface ProvinceCity {
+  province_id: number;
+  cities: City[];
+}
+
 interface City {
   city_id: number;
   description: string;
 }
+
 interface MortgageFormProps {
   principal: number;
   interestRate: number;
@@ -68,19 +74,23 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
   useEffect(() => {
     if (selectedProvince !== null) {
       // Fetch cities for the selected province from backend API
+      // Inside the useEffect hook where cities are fetched
       axios
-        .get<City[]>(`http://localhost:5000/api/cities/${selectedProvince}`)
+        .get<ProvinceCity[]>(
+          `http://localhost:5000/api/cities/${selectedProvince}`
+        )
         .then((response) => {
           console.log("Cities response:", response.data); // Log the response data
-          setCities(response.data);
+          // Extract the cities array from the response
+          const citiesArray = response.data[0].cities;
+          // Set the cities state with the extracted array
+          setCities(citiesArray);
         })
         .catch((error) => {
           console.error("Error fetching cities:", error);
         });
     }
   }, [selectedProvince]);
-  
-  
 
   const handleProvinceChange = (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -94,48 +104,48 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
   return (
     <div className="font-medium font-sans">
       <div className="w-full">
-      <label className="font-medium font-sans">Principal:</label>
-      <input
-        type="number"
-        value={principal}
-        onChange={(e) => {
-          if (e.target instanceof HTMLInputElement) {
-            onPrincipalChange(Number(e.target.value));
-          }
-        }}
-        disabled={inputsDisabled}
-        className="w-full mb-2 border border-gray-500 rounded-md"
-      />
+        <label className="font-medium font-sans">Principal:</label>
+        <input
+          type="number"
+          value={principal}
+          onChange={(e) => {
+            if (e.target instanceof HTMLInputElement) {
+              onPrincipalChange(Number(e.target.value));
+            }
+          }}
+          disabled={inputsDisabled}
+          className="w-full mb-2 border border-gray-500 rounded-md"
+        />
       </div>
 
       <div className="w-full">
-      <label>Interest Rate:</label>
-      <input
-        type="number"
-        value={interestRate}
-        onChange={(e) => {
-          if (e.target instanceof HTMLInputElement) {
-            onInterestRateChange(Number(e.target.value));
-          }
-        }}
-        disabled={inputsDisabled}
-        className="w-full mb-2 border border-gray-500 rounded-md"
-      />
+        <label>Interest Rate:</label>
+        <input
+          type="number"
+          value={interestRate}
+          onChange={(e) => {
+            if (e.target instanceof HTMLInputElement) {
+              onInterestRateChange(Number(e.target.value));
+            }
+          }}
+          disabled={inputsDisabled}
+          className="w-full mb-2 border border-gray-500 rounded-md"
+        />
       </div>
 
       <div className="w-full">
-      <label>Loan Term:</label>
-      <input
-        type="number"
-        value={loanTerm}
-        onChange={(e) => {
-          if (e.target instanceof HTMLInputElement) {
-            onLoanTermChange(Number(e.target.value));
-          }
-        }}
-        disabled={inputsDisabled}
-        className="w-full mb-2 border border-gray-500 rounded-md"
-      />
+        <label>Loan Term:</label>
+        <input
+          type="number"
+          value={loanTerm}
+          onChange={(e) => {
+            if (e.target instanceof HTMLInputElement) {
+              onLoanTermChange(Number(e.target.value));
+            }
+          }}
+          disabled={inputsDisabled}
+          className="w-full mb-2 border border-gray-500 rounded-md"
+        />
       </div>
 
       <div className="w-4/5 mb-3">
@@ -169,39 +179,38 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
       </div>
 
       <div className="w-full flex flex-col mb-3">
-      <div className="flex">
-        <div className="w-1/2 mr-2">
-          <label>Province:</label>
-          <select
-            value={selectedProvince ?? ""}
-            onChange={handleProvinceChange}
-            disabled={inputsDisabled}
-            className="w-full border rounded-md font-normal"
-          >
-            <option value="">Select Province</option>
-            {provinces.map((province) => (
-              <option key={province.province_id} value={province.province_id}>
-                {province.description}
-              </option>
-            ))}
-          </select>
+        <div className="flex">
+          <div className="w-1/2 mr-2">
+            <label>Province:</label>
+            <select
+              value={selectedProvince ?? ""}
+              onChange={handleProvinceChange}
+              disabled={inputsDisabled}
+              className="w-full border rounded-md font-normal"
+            >
+              <option value="">Select Province</option>
+              {provinces.map((province) => (
+                <option key={province.province_id} value={province.province_id}>
+                  {province.description}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="w-1/2 ml-2">
+            <label>City:</label>
+            <select
+              disabled={!selectedProvince || inputsDisabled}
+              className="w-full border rounded-md font-normal"
+            >
+              <option value="">Select City</option>
+              {cities.map((city) => (
+                <option key={city.city_id} value={city.city_id}>
+                  {city.description}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
-        <div className="w-1/2 ml-2">
-          <label>City:</label>
-          <select
-  disabled={!selectedProvince || inputsDisabled}
-  className="w-full border rounded-md font-normal"
->
-  <option value="">Select City</option>
-  {cities.map((city) => (
-    <option key={city.city_id} value={city.city_id}>
-      {city.description}
-    </option>
-  ))}
-</select>
-
-        </div>
-      </div>
       </div>
 
       {showExtraFields && (
