@@ -3,7 +3,7 @@
 /*This is a copy of PDFUpload.tsx. This is fetching types from MongoDB.*/
 
 import React, { useState, useEffect } from "react";
-import "../styles/PDF.css";
+
 interface PDFUploadProps {
   // Add any props if needed
 }
