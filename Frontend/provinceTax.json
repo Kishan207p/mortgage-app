@@ -1,6 +1,5 @@
 [
-  {
-    "province_id":"1",
+  { "province_id":"1",
     "province_tax": {
       "land_transfer_tax": null,
       "property_registration_tax": {

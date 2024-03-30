@@ -3,6 +3,7 @@
 /*This is a copy of PDFUpload.tsx. This is fetching types from MongoDB.*/
 
 import React, { useState, useEffect } from "react";
+import "../styles/PDF.css";
 interface PDFUploadProps {
   // Add any props if needed
 }
@@ -126,11 +127,12 @@ const PDFUpload: React.FC<PDFUploadProps> = () => {
     <div className="flex">
       <div className="w-full">
         <div className="max-h-[600px] overflow-y-auto pr-4">
+          
           {/* Limit height and make it scrollable */}
           {pdfFiles.map((pdf, index) => (
             <div key={index} className="flex mb-4">
               <div
-                className=" p-4 border border-gray-300 rounded-lg w-max"
+                className="m-4 p-4 border border-gray-300 rounded-lg w-max"
                 style={{ paddingRight: "0px" }}
               >
                 <h3 className="text-lg font-semibold mb-4">Upload PDF</h3>
@@ -204,14 +206,14 @@ const PDFUpload: React.FC<PDFUploadProps> = () => {
           <div className="button-container">
             <button
               onClick={handleAddCard}
-              className="px-4 py-2 bg-blue-500 text-white rounded-md"
+              className="m-4 px-4 py-2 bg-blue-500 text-white rounded-md"
             >
               Add Card
             </button>
           </div>
         </div>
       </div>
-      <div className="w-max">
+      <div className="w-1/3 ml-4">
         {selectedPdfIndex !== null &&
           showPdf &&
           pdfFiles[selectedPdfIndex]?.pdfFile && (
@@ -223,8 +225,11 @@ const PDFUpload: React.FC<PDFUploadProps> = () => {
                     )
                   : ""
               }
-              className="w-[600px] h-[600px] border-none"
-               /* Apply specific height and width */
+              className="w-full h-96 border-none"
+              style={{
+                width: "600px",
+                height: "600px",
+              }} /* Apply specific height and width */
             />
           )}
       </div>
