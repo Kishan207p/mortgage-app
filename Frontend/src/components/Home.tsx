@@ -9,7 +9,7 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-20">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-20 mx-32">
       <motion.div
         className="p-6 bg-white rounded-lg shadow-md h-15"
         variants={cardVariants}
@@ -21,7 +21,7 @@ const Home: React.FC = () => {
         <p className="text-gray-700 mb-4">
           Use our mortgage calculator to estimate your monthly mortgage payments based on loan amount, interest rate, and loan term.
         </p>
-        <button className="bg-sky-900 text-white px-4 py-2 rounded-lg hover:bg-sky-950 focus:outline-none focus:bg-blue-600"
+        <button className="bg-sky-900 text-white px-4 py-2 rounded-lg hover:bg-sky-950 focus:outline-none focus:bg-sky-950"
                 onClick={() => window.location.assign('/calculator')}>
           Calculate Now
         </button>
@@ -46,25 +46,3 @@ const Home: React.FC = () => {
 };
 
 export default Home;
-
-
-// import React from 'react';
-
-// const Home: React.FC = () => {
-//   return (
-//     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-20">
-//       <div className="p-6 bg-white rounded-lg shadow-md h-15">
-//         <h2 className="text-2xl font-bold mb-4">Calculate Mortgage Payments</h2>
-//         <p className="text-gray-700 mb-4">Use our mortgage calculator to estimate your monthly mortgage payments based on loan amount, interest rate, and loan term.</p>
-//         <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Calculate Now</button>
-//       </div>
-//       <div className="p-6 bg-white rounded-lg shadow-md">
-//         <h2 className="text-2xl font-bold mb-4">Compare Mortgage Rates</h2>
-//         <p className="text-gray-700 mb-4">Compare mortgage rates from different lenders to find the best rates for your home loan.</p>
-//         <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Compare Rates</button>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Home;

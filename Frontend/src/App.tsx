@@ -14,7 +14,7 @@ const App = () => {
     <Router>
       <div className="flex h-screen">
         <SideBar />
-        <div className="flex-grow p-4 ml-40">
+        <div className="flex-grow ml-40">
           <Routes>
           <Route path="/" element={<HomePage />} />
             <Route path="/Home" element={<HomePage />} />

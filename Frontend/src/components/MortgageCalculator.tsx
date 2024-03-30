@@ -394,50 +394,58 @@ const MortgageCalculator: React.FC = () => {
   };
 
   return (
-    <div className="clearfix">
-      <div className="mortgage-form-container">
-        <MortgageForm
-          principal={principal}
-          interestRate={interestRate}
-          loanTerm={loanTerm}
-          downPayment={downPayment}
-          downPaymentUnit={downPaymentUnit}
-          extrapayment1={extraPayment1}
-          extrapayment2={extraPayment2}
-          extrapayment3={extraPayment3}
-          extrapayment4={extraPayment4}
-          onDownPaymentChange={handleDownPaymentChange}
-          onDownPaymentUnitChange={handleDownPaymentUnitChange}
-          onInterestRateChange={setInterestRate}
-          onLoanTermChange={setLoanTerm}
-          onPrincipalChange={setPrincipal}
-          inputsDisabled={inputsDisabled}
-        />
-        <button
-          className="cal-button"
-          onClick={handleCalculate}
-          disabled={inputsDisabled}
-        >
-          Calculate
-        </button>
-        <button className="reset-button" onClick={handleReset}>
-          Reset
-        </button>
+    <div className="flex">
+      <div className="w-1/3 border border-t-slate-500 border-t-4 border-gray-300 px-5 py-5 bg-slate-100 shadow-md ml-4 rounded-lg mb-10">
+        <div className="font-medium text-center text-lg mb-4">Start Calculation</div>
+          <MortgageForm
+            principal={principal}
+            interestRate={interestRate}
+            loanTerm={loanTerm}
+            downPayment={downPayment}
+            downPaymentUnit={downPaymentUnit}
+            extrapayment1={extraPayment1}
+            extrapayment2={extraPayment2}
+            extrapayment3={extraPayment3}
+            extrapayment4={extraPayment4}
+            onDownPaymentChange={handleDownPaymentChange}
+            onDownPaymentUnitChange={handleDownPaymentUnitChange}
+            onInterestRateChange={setInterestRate}
+            onLoanTermChange={setLoanTerm}
+            onPrincipalChange={setPrincipal}
+            inputsDisabled={inputsDisabled}
+          />
+          <div className="flex mt-4">
+            <button
+              className="cal-button bg-sky-900 hover:bg-slate-600 text-white font-bold py-2 px-4 rounded mr-2"
+              onClick={handleCalculate}
+              disabled={inputsDisabled}
+            >
+              Calculate
+            </button>
+            <button
+              className="reset-button bg-sky-800 hover:bg-slate-500 text-white font-bold py-2 px-4 rounded"
+              onClick={handleReset}
+            >
+              Reset
+            </button>
+        </div>
       </div>
-      <div className="mortgage-results-container">
-        <MortgageResults
-          totalDownPayment={totalDownPayment}
-          monthlyPayment={monthlyPayment}
-          biWeeklyPayment={biWeeklyPayment}
-          semiMonthlyPayment={semiMonthlyPayment}
-          loanAmount={loanAmount}
-          totalPaidMortgage={totalPaidMortgage}
-          totalInterestPaid={totalInterestPaid}
-          perMonthyearlyPayments={perMonthyearlyPayments}
-          perSemiMonthyearlyPayments={perSemiMonthyearlyPayments}
-          perBiWeekyearlyPayments={perBiWeekyearlyPayments}
-          isCalculated={isCalculated}
-        />
+      <div className="w-1/2 p-8">
+        <div className="mortgage-results-container">
+          <MortgageResults
+            totalDownPayment={totalDownPayment}
+            monthlyPayment={monthlyPayment}
+            biWeeklyPayment={biWeeklyPayment}
+            semiMonthlyPayment={semiMonthlyPayment}
+            loanAmount={loanAmount}
+            totalPaidMortgage={totalPaidMortgage}
+            totalInterestPaid={totalInterestPaid}
+            perMonthyearlyPayments={perMonthyearlyPayments}
+            perSemiMonthyearlyPayments={perSemiMonthyearlyPayments}
+            perBiWeekyearlyPayments={perBiWeekyearlyPayments}
+            isCalculated={isCalculated}
+          />
+        </div>
       </div>
     </div>
   );

@@ -89,8 +89,9 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
   };
 
   return (
-    <div className="mortgage-form">
-      <label>Principal:</label>
+    <div className="font-medium font-sans">
+      <div className="w-full">
+      <label className="font-medium font-sans">Principal:</label>
       <input
         type="number"
         value={principal}
@@ -100,8 +101,11 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
           }
         }}
         disabled={inputsDisabled}
+        className="w-full mb-2 border border-gray-500 rounded-md"
       />
+      </div>
 
+      <div className="w-full">
       <label>Interest Rate:</label>
       <input
         type="number"
@@ -112,8 +116,11 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
           }
         }}
         disabled={inputsDisabled}
+        className="w-full mb-2 border border-gray-500 rounded-md"
       />
+      </div>
 
+      <div className="w-full">
       <label>Loan Term:</label>
       <input
         type="number"
@@ -124,57 +131,74 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
           }
         }}
         disabled={inputsDisabled}
+        className="w-full mb-2 border border-gray-500 rounded-md"
       />
-
-      <label>Down Payment:</label>
-      <div className="down-payment-container">
-        <input
-          type="text"
-          value={downPayment}
-          onChange={(e) => {
-            if (!inputsDisabled) {
-              onDownPaymentChange(e);
-            }
-          }}
-          disabled={inputsDisabled}
-        />
-        <select
-          value={downPaymentUnit}
-          onChange={(e) => {
-            if (!inputsDisabled) {
-              onDownPaymentUnitChange(e);
-            }
-          }}
-          disabled={inputsDisabled}
-        >
-          <option value="%">%</option>
-          <option value="$">$</option>
-        </select>
       </div>
 
-      <label>Province:</label>
-      <select
-        value={selectedProvince ?? ""}
-        onChange={handleProvinceChange}
-        disabled={inputsDisabled}
-      >
-        <option value="">Select Province</option>
-        {provinces.map((province) => (
-          <option key={province.province_id} value={province.province_id}>
-            {province.description}
-          </option>
-        ))}
-      </select>
+      <div className="w-4/5 mb-3">
+        <label>Down Payment:</label>
+        <div className="flex">
+          <input
+            type="text"
+            value={downPayment}
+            onChange={(e) => {
+              if (!inputsDisabled) {
+                onDownPaymentChange(e);
+              }
+            }}
+            disabled={inputsDisabled}
+            className="w-4/5 mb-2 mr-2 border border-gray-500 rounded-md"
+          />
+          <select
+            value={downPaymentUnit}
+            onChange={(e) => {
+              if (!inputsDisabled) {
+                onDownPaymentUnitChange(e);
+              }
+            }}
+            disabled={inputsDisabled}
+            className="w-1/5 rounded-md mt-[-4] border border-gray-500 "
+          >
+            <option value="%">%</option>
+            <option value="$">$</option>
+          </select>
+        </div>
+      </div>
 
-      <label>City:</label>
-      <select disabled={!selectedProvince || inputsDisabled}>
-        <option value="">Select City</option>
-        {cities.map((city) => (
-          <option key={city.city_id} value={city.city_id}>
-            {city.description}
-          </option>
-        ))}
-      </select>
+      <div className="w-full flex flex-col mb-3">
+      <div className="flex">
+        <div className="w-1/2 mr-2">
+          <label>Province:</label>
+          <select
+            value={selectedProvince ?? ""}
+            onChange={handleProvinceChange}
+            disabled={inputsDisabled}
+            className="w-full border rounded-md font-normal"
+          >
+            <option value="">Select Province</option>
+            {provinces.map((province) => (
+              <option key={province.province_id} value={province.province_id}>
+                {province.description}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="w-1/2 ml-2">
+          <label>City:</label>
+          <select
+            disabled={!selectedProvince || inputsDisabled}
+            className="w-full border rounded-md font-normal"
+          >
+            <option value="">Select City</option>
+            {cities.map((city) => (
+              <option key={city.city_id} value={city.city_id}>
+                {city.description}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+      </div>
 
       {showExtraFields && (
         <>
@@ -183,6 +207,7 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
             type="number"
             value={extrapayment1}
             disabled={inputsDisabled}
+            className="w-full mb-2 border border-gray-500 rounded-md"
           />
 
           <label>Extra2:</label>
@@ -190,6 +215,7 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
             type="number"
             value={extrapayment2}
             disabled={inputsDisabled}
+            className="w-full mb-2 border border-gray-500 rounded-md"
           />
 
           <label>Extra3:</label>
@@ -197,6 +223,7 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
             type="number"
             value={extrapayment3}
             disabled={inputsDisabled}
+            className="w-full mb-2 border border-gray-500 rounded-md"
           />
 
           <label>Extra4:</label>
@@ -204,6 +231,7 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
             type="number"
             value={extrapayment4}
             disabled={inputsDisabled}
+            className="w-full mb-2 border border-gray-500 rounded-md"
           />
         </>
       )}
