@@ -65,12 +65,24 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
       });
   }, []);
 
+  const handleProvinceChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    console.log(event.target.value);
+
+    const provinceId = parseInt(event.target.value);
+    console.log(provinceId);
+
+    setSelectedProvince(provinceId);
+  };
+
   useEffect(() => {
     if (selectedProvince !== null) {
-      // Fetch cities for the selected province from backend API
       axios
         .get<City[]>(`http://localhost:5000/api/cities/${selectedProvince}`)
         .then((response) => {
+          console.log(response.data);
+
           setCities(response.data);
         })
         .catch((error) => {
@@ -78,15 +90,6 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
         });
     }
   }, [selectedProvince]);
-
-  const handleProvinceChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    console.log(event.target.value);
-
-    const provinceId = parseInt(event.target.value);
-    setSelectedProvince(provinceId);
-  };
 
   return (
     <div className="font-medium font-sans">
@@ -176,8 +179,8 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
               className="w-full border rounded-md font-normal"
             >
               <option value="">Select Province</option>
-              {provinces.map((province) => (
-                <option key={province.province_id} value={province.province_id}>
+              {provinces.map((province, index) => (
+                <option key={`province_${index}`} value={province.province_id}>
                   {province.description}
                 </option>
               ))}
@@ -190,8 +193,8 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
               className="w-full border rounded-md font-normal"
             >
               <option value="">Select City</option>
-              {cities.map((city) => (
-                <option key={city.city_id} value={city.city_id}>
+              {cities.map((city, index) => (
+                <option key={`city_${index}`} value={city.city_id}>
                   {city.description}
                 </option>
               ))}
@@ -205,7 +208,7 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
           <label>Extra1:</label>
           <input
             type="number"
-            value={extrapayment1}
+            defaultValue={extrapayment1}
             disabled={inputsDisabled}
             className="w-full mb-2 border border-gray-500 rounded-md"
           />
@@ -213,7 +216,7 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
           <label>Extra2:</label>
           <input
             type="number"
-            value={extrapayment2}
+            defaultValue={extrapayment2}
             disabled={inputsDisabled}
             className="w-full mb-2 border border-gray-500 rounded-md"
           />
@@ -221,7 +224,7 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
           <label>Extra3:</label>
           <input
             type="number"
-            value={extrapayment3}
+            defaultValue={extrapayment3}
             disabled={inputsDisabled}
             className="w-full mb-2 border border-gray-500 rounded-md"
           />
@@ -229,7 +232,7 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
           <label>Extra4:</label>
           <input
             type="number"
-            value={extrapayment4}
+            defaultValue={extrapayment4}
             disabled={inputsDisabled}
             className="w-full mb-2 border border-gray-500 rounded-md"
           />
