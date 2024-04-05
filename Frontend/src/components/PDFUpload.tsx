@@ -187,7 +187,7 @@ const PDFUpload: React.FC<PDFUploadProps> = () => {
       <div className="w-17/24">
         <div className=" h-1/8">
           <div className="flex">
-            <div className="relative h-32 w-18">
+            <div className="relative h-20 w-18">
               <button
                 onClick={handleAddCard}
                 className="mt-4 mb-4 mr-4 p-4 bg-blue-500 text-white rounded-full focus:outline-none shadow-md focus:ring-2
@@ -209,7 +209,7 @@ const PDFUpload: React.FC<PDFUploadProps> = () => {
           <div className="max-h-[600px] overflow-y-auto ">
             {pdfFiles.map((pdf, index) => (
               <div key={index} className="flex flex-col mb-4 items-center">
-                <div className="w-auto mt-4 mb-4 p-4 border border-gray-300 shadow-md bg-white rounded-lg flex flex-col items-center">
+                <div className="w-auto mt-4 mb-4 pl-4 pt-4 pb-4 border border-gray-300 shadow-md bg-white rounded-lg flex flex-col items-center">
                   <div className="flex items-center justify-between w-full">
                     {documentTypes.length > 0 && (
                       <select
