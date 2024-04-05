@@ -88,8 +88,10 @@ const DocumentPage: React.FC = () => {
           handleNext={handleNextStep}
           handlePrevious={handlePreviousStep}
         />
+        
         {renderCurrentStep()}
-        <div className="mt-4 flex justify-end">
+        
+        <div className="fixed bottom-4 right-4">
           <button
             className="px-4 py-2 bg-blue-500 text-white rounded mr-4"
             onClick={handlePreviousStep}
