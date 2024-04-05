@@ -1,7 +1,6 @@
 // DocumentPage.tsx
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Steps from '../components/progress';
+import Steps from '../components/step';
 import CreateApplication from '../components/phases/CreateApplication';
 import CreditCheck from '../components/phases/CreditCheck';
 import UploadDocuments from '../components/phases/UploadDocuments';
@@ -12,11 +11,12 @@ import ConditionallyApproved from '../components/phases/ConditionallyApproved';
 import ClearToClose from '../components/phases/ClearToClose';
 import Closing from '../components/phases/Closing';
 import LoanFunded from '../components/phases/LoanFunded';
+import { IoCreateOutline } from "react-icons/io5";
 
 const DocumentPage: React.FC = () => {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const [steps, setSteps] = useState([
-    { path: "/", name: "Create Application", completed: false },
+    { path: "/", name: <IoCreateOutline />, completed: false },
     { path: "/creditcheck", name: "Credit Check", completed: false },
     { path: "/upload-documents", name: "Upload Documents", completed: false },
     { path: "/loan-processing", name: "Loan Processing", completed: false },
