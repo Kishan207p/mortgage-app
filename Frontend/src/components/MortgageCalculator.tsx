@@ -5,7 +5,10 @@ import MortgageResults from "./MortgageResults";
 import TaxCalculator from "./TaxCalculator";
 import axios from "axios";
 
-<<<<<<< Updated upstream
+
+interface MortgageCalculatorProps {
+  pageContext: "calculator" | "comparison"; // Define possible contexts
+}
 interface Province {
   province_id: number;
   code: string;
@@ -21,14 +24,9 @@ interface City {
   city_id: number;
   description: string;
 }
-const MortgageCalculator: React.FC = () => {
-=======
-interface MortgageCalculatorProps {
-  pageContext: "calculator" | "comparison"; // Define possible contexts
-}
 
 const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({ pageContext }) => {
->>>>>>> Stashed changes
+
   const [principal, setPrincipal] = useState<number>(0);
   const [interestRate, setInterestRate] = useState<number>(0);
   const [loanTerm, setLoanTerm] = useState<number>(0);
@@ -90,14 +88,11 @@ const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({ pageContext }) 
 
   const [isCalculated, setIsCalculated] = useState<boolean>(false);
   const [inputsDisabled, setInputsDisabled] = useState<boolean>(false);
-<<<<<<< Updated upstream
   const [provinces, setProvinces] = useState<Province[]>([]);
   const [cities, setCities] = useState<City[]>([]);
   const [selectedProvince, setSelectedProvince] = useState<number | null>(null);
   const [provinceTax, setProvinceTax] = useState<number | null>(null);
-=======
-  
->>>>>>> Stashed changes
+
 
   const handleCalculate = () => {
     setIsCalculated(true);
@@ -467,12 +462,10 @@ const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({ pageContext }) 
   };
 
   return (
-<<<<<<< Updated upstream
-    <div className="flex">
-      <div className="w-1/3 border border-t-slate-500 border-t-4 border-gray-300 px-5 py-5 bg-slate-100 shadow-md ml-4 rounded-lg mb-10">
-        <div className="font-medium text-center text-lg mb-4">
-          Start Calculation
-        </div>
+
+<div className={pageContext === "calculator" ? "flex" : "flex-col"}>
+<div className={`border border-t-slate-500 border-t-4 border-gray-300 px-5 py-5 bg-slate-100 shadow-md ml-4 rounded-lg mb-10 ${pageContext === "calculator" ? "w-1/3" : "w-full"}`}>
+    <div className="font-medium text-center text-lg mb-4">Start Calculation</div>
         <MortgageForm
           principal={principal}
           interestRate={interestRate}
@@ -508,42 +501,6 @@ const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({ pageContext }) 
           >
             Reset
           </button>
-=======
-    <div className={pageContext === "calculator" ? "flex" : "flex-col"}>
-    <div className={`border border-t-slate-500 border-t-4 border-gray-300 px-5 py-5 bg-slate-100 shadow-md ml-4 rounded-lg mb-10 ${pageContext === "calculator" ? "w-1/3" : "w-full"}`}>
-        <div className="font-medium text-center text-lg mb-4">Start Calculation</div>
-          <MortgageForm
-            principal={principal}
-            interestRate={interestRate}
-            loanTerm={loanTerm}
-            downPayment={downPayment}
-            downPaymentUnit={downPaymentUnit}
-            extrapayment1={extraPayment1}
-            extrapayment2={extraPayment2}
-            extrapayment3={extraPayment3}
-            extrapayment4={extraPayment4}
-            onDownPaymentChange={handleDownPaymentChange}
-            onDownPaymentUnitChange={handleDownPaymentUnitChange}
-            onInterestRateChange={setInterestRate}
-            onLoanTermChange={setLoanTerm}
-            onPrincipalChange={setPrincipal}
-            inputsDisabled={inputsDisabled}
-          />
-          <div className="flex mt-4">
-            <button
-              className="cal-button bg-sky-900 hover:bg-slate-600 text-white font-bold py-2 px-4 rounded mr-2"
-              onClick={handleCalculate}
-              disabled={inputsDisabled}
-            >
-              Calculate
-            </button>
-            <button
-              className="reset-button bg-sky-800 hover:bg-slate-500 text-white font-bold py-2 px-4 rounded"
-              onClick={handleReset}
-            >
-              Reset
-            </button>
->>>>>>> Stashed changes
         </div>
       </div>
       <div className={pageContext === "calculator" ? "w-2/3 mx-8 p-8 bg-slate-300": "w-full bg-green-200"}>

@@ -158,57 +158,6 @@ const MortgageResults: React.FC<MortgageResultsProps> = ({
     <div className="mortgage-results">
       <div className="mb-8">
       {isCalculated && totalDownPayment !== null && (
-<<<<<<< Updated upstream
-        <div>
-          <h3>Total Down Payment:</h3>
-          <p>${totalDownPayment.toFixed(2)}</p>
-        </div>
-      )}
-      {monthlyPayment !== null && (
-        <div>
-          <h3>Monthly Payment:</h3>
-          <p>${monthlyPayment.toFixed(2)}</p>
-        </div>
-      )}
-      {biWeeklyPayment !== null && (
-        <div>
-          <h3>Bi-Weekly Payment:</h3>
-          <p>${biWeeklyPayment.toFixed(2)}</p>
-        </div>
-      )}
-      {semiMonthlyPayment !== null && (
-        <div>
-          <h3>Semi-Monthly Payment:</h3>
-          <p>${semiMonthlyPayment.toFixed(2)}</p>
-        </div>
-      )}
-      {loanAmount !== null && (
-        <div>
-          <h3>Loan Amount:</h3>
-          <p>${loanAmount.toFixed(2)}</p>
-        </div>
-      )}
-      {totalPaidMortgage !== null && (
-        <div>
-          <h3>Total Paid Mortgage:</h3>
-          <p>${totalPaidMortgage.toFixed(2)}</p>
-        </div>
-      )}
-      {totalInterestPaid !== null && (
-        <div>
-          <h3>Total Interest Paid:</h3>
-          <p>${totalInterestPaid.toFixed(2)}</p>
-        </div>
-      )}
-      {provinceTax !== null && (
-        <div>
-          <h3>Total Provincial Tax:</h3>
-          <p>${provinceTax.toFixed(2)}</p>
-        </div>
-      )}
-      <div>
-        <h3>Payment Plan Options:</h3>
-=======
           <div className="mt-4 ">
             <h3 className="text-md font-semibold">Total Down Payment:</h3>
             <p className="text-md">${totalDownPayment.toFixed(2)}</p>
@@ -250,11 +199,16 @@ const MortgageResults: React.FC<MortgageResultsProps> = ({
             <p className="text-md">${totalInterestPaid.toFixed(2)}</p>
           </div>
         )}
+          {provinceTax !== null && (
+        <div  className="mt-4">
+          <h3 className="text-md font-semibold">Total Provincial Tax:</h3>
+          <p className="text-md">${provinceTax.toFixed(2)}</p>
+        </div>
+      )}
       </div>
 
       <div className="border justify-content-center text-center p-2">
         <h3 className="text-lg font-bold mb-3">Payment Plan Options:</h3>
->>>>>>> Stashed changes
         <button
           style={{
             backgroundColor:

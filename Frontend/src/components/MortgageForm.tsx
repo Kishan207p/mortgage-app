@@ -64,11 +64,7 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
         <label className="font-medium font-sans">Principal:</label>
         <input
           type="number"
-<<<<<<< Updated upstream
-          value={Number(principal).toString()}
-=======
           value={principal === 0 ? '' : principal}
->>>>>>> Stashed changes
           onChange={(e) => {
             if (e.target instanceof HTMLInputElement) {
               onPrincipalChange(Number(e.target.value));
@@ -83,11 +79,7 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
         <label>Interest Rate:</label>
         <input
           type="number"
-<<<<<<< Updated upstream
-          value={Number(interestRate).toString()}
-=======
           value={interestRate === 0 ? '' : interestRate}
->>>>>>> Stashed changes
           onChange={(e) => {
             if (e.target instanceof HTMLInputElement) {
               onInterestRateChange(Number(e.target.value));
@@ -102,11 +94,7 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
         <label>Loan Term:</label>
         <input
           type="number"
-<<<<<<< Updated upstream
-          value={Number(loanTerm).toString()}
-=======
           value={loanTerm === 0 ? '' : loanTerm}
->>>>>>> Stashed changes
           onChange={(e) => {
             if (e.target instanceof HTMLInputElement) {
               onLoanTermChange(Number(e.target.value));
