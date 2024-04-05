@@ -24,7 +24,7 @@ const SideBar = () => {
         <NavLink
           to="/Home"
           className={({ isActive }) =>
-            `flex items-center block px-4 py-2 ${
+            `flex items-center px-4 py-2 ${
               isActive
                 ? "bg-gray-800 text-gray-400"
                 : "text-white hover:bg-gray-800"
@@ -44,6 +44,18 @@ const SideBar = () => {
           }
         >
           <HiCalculator className="mr-2" /> Calculator
+        </NavLink>
+        <NavLink
+          to="/comparison" // Added NavLink for "/comparison" here
+          className={({ isActive }) =>
+            `flex items-center  px-4 py-2 ${
+              isActive
+                ? "bg-gray-800 text-gray-400"
+                : "text-white hover:bg-gray-800"
+            }`
+          }
+        >
+          Comparison
         </NavLink>
         <NavLink
           to="/document"
@@ -72,7 +84,7 @@ const SideBar = () => {
         <NavLink
           to="/news"
           className={({ isActive }) =>
-            `flex items-center block px-4 py-2 ${
+            `flex items-center px-4 py-2 ${
               isActive
                 ? "bg-gray-800 text-gray-400"
                 : "text-white hover:bg-gray-800"
@@ -84,7 +96,7 @@ const SideBar = () => {
         <NavLink
           to="/pdf"
           className={({ isActive }) =>
-            `flex items-center block px-4 py-2 ${
+            `flex items-center  px-4 py-2 ${
               isActive
                 ? "bg-gray-800 text-gray-400"
                 : "text-white hover:bg-gray-800"
@@ -97,7 +109,7 @@ const SideBar = () => {
         <NavLink
           to="/aboutus"
           className={({ isActive }) =>
-            `flex items-center block px-4 py-2 ${
+            `flex items-center  px-4 py-2 ${
               isActive
                 ? "bg-gray-800 text-gray-400"
                 : "text-white hover:bg-gray-800"
@@ -109,13 +121,13 @@ const SideBar = () => {
       </nav>
       <NavLink
         to="/"
-        className="flex items-center block px-4 text-xs mt-auto my-2 hover:underline"
+        className="flex items-center px-4 text-xs mt-auto my-2 hover:underline"
       >
         privacy
       </NavLink>
       <NavLink
         to="/"
-        className="flex items-center block px-4 text-xs mt-auto mb-4 hover:underline"
+        className="flex items-center px-4 text-xs mt-auto mb-4 hover:underline"
       >
         Terms
       </NavLink>

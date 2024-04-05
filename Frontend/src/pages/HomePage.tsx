@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 
 const HomePage: React.FC = () => {
   return (
-    <div className="flex flex-col min-h-screen min-w-screen bg-gray-100 p-3">
+    <div className="flex flex-col min-h-screen min-w-screen bg-gray-100 p-2">
       <Header />
       <main className="w-full flex-grow">
         <div className="container mx-auto px-4 py-8">

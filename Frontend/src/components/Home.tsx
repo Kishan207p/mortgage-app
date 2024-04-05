@@ -9,7 +9,7 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-20 mx-32">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-20 mx-16">
       <motion.div
         className="p-6 bg-white rounded-lg shadow-md h-15"
         variants={cardVariants}
@@ -37,7 +37,8 @@ const Home: React.FC = () => {
         <p className="text-gray-700 mb-4">
           Compare mortgage rates from different lenders to find the best rates for your home loan.
         </p>
-        <button className="bg-sky-900 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+        <button className="bg-sky-900 text-white px-4 py-2 rounded-lg hover:bg-blue-950 focus:outline-none focus:bg-sky-950"
+          onClick={() => window.location.assign('/comparison')}>
           Compare Rates
         </button>
       </motion.div>

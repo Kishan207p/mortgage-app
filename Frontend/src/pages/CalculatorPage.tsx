@@ -9,7 +9,7 @@ const CalculatorPage = () => {
           Calculator Page
         </div>
         <hr className="mb-6"/>
-        <MortgageCalculator/>
+        <MortgageCalculator pageContext="calculator"/>
       </div>
   );
 };
