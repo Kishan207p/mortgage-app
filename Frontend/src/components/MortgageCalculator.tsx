@@ -1,8 +1,25 @@
 // MortgageCalculator.tsx
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import MortgageForm from "./MortgageForm";
 import MortgageResults from "./MortgageResults";
+import TaxCalculator from "./TaxCalculator";
+import axios from "axios";
 
+interface Province {
+  province_id: number;
+  code: string;
+  description: string;
+}
+
+interface ProvinceCity {
+  province_id: number;
+  cities: City[];
+}
+
+interface City {
+  city_id: number;
+  description: string;
+}
 const MortgageCalculator: React.FC = () => {
   const [principal, setPrincipal] = useState<number>(0);
   const [interestRate, setInterestRate] = useState<number>(0);
@@ -65,6 +82,10 @@ const MortgageCalculator: React.FC = () => {
 
   const [isCalculated, setIsCalculated] = useState<boolean>(false);
   const [inputsDisabled, setInputsDisabled] = useState<boolean>(false);
+  const [provinces, setProvinces] = useState<Province[]>([]);
+  const [cities, setCities] = useState<City[]>([]);
+  const [selectedProvince, setSelectedProvince] = useState<number | null>(null);
+  const [provinceTax, setProvinceTax] = useState<number | null>(null);
 
   const handleCalculate = () => {
     setIsCalculated(true);
@@ -319,11 +340,12 @@ const MortgageCalculator: React.FC = () => {
     setperMonthYearlyPayments(perMonthyearlyPayments);
     setperBiWeekYearlyPayments(perBiWeekyearlyPayments);
     setperSemiMonthYearlyPayments(perSemiMonthyearlyPayments);
-    // console.log(perMonthyearlyPayments);
-    // console.log(perBiWeekyearlyPayments);
-    // console.log(perSemiMonthyearlyPayments);
 
-    // setYearlyPayments(yearlyPayments);
+    setSelectedProvince(selectedProvince);
+  };
+
+  const updateTaxAmount = (amount: number) => {
+    setProvinceTax(amount);
   };
 
   const handleDownPaymentChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -369,6 +391,44 @@ const MortgageCalculator: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    // Fetch provinces from backend API
+    axios
+      .get<Province[]>("http://localhost:5000/api/provinces")
+      .then((response) => {
+        setProvinces(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching provinces:", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (selectedProvince !== null) {
+      // Fetch cities for the selected province from backend API
+      // Inside the useEffect hook where cities are fetched
+      axios
+        .get<ProvinceCity[]>(
+          `http://localhost:5000/api/cities/${selectedProvince}`
+        )
+        .then((response) => {
+          console.log("Cities response:", response.data);
+          const citiesArray = response.data[0].cities;
+          setCities(citiesArray);
+        })
+        .catch((error) => {
+          console.error("Error fetching cities:", error);
+        });
+    }
+  }, [selectedProvince]);
+
+  const handleProvinceChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    const provinceId = parseInt(event.target.value);
+    setSelectedProvince(provinceId);
+  };
+
   const handleReset = () => {
     setPrincipal(0);
     setInterestRate(0);
@@ -391,43 +451,50 @@ const MortgageCalculator: React.FC = () => {
     setperBiWeekYearlyPayments(null);
     setIsCalculated(false);
     setInputsDisabled(false);
+    setSelectedProvince(null);
   };
 
   return (
     <div className="flex">
       <div className="w-1/3 border border-t-slate-500 border-t-4 border-gray-300 px-5 py-5 bg-slate-100 shadow-md ml-4 rounded-lg mb-10">
-        <div className="font-medium text-center text-lg mb-4">Start Calculation</div>
-          <MortgageForm
-            principal={principal}
-            interestRate={interestRate}
-            loanTerm={loanTerm}
-            downPayment={downPayment}
-            downPaymentUnit={downPaymentUnit}
-            extrapayment1={extraPayment1}
-            extrapayment2={extraPayment2}
-            extrapayment3={extraPayment3}
-            extrapayment4={extraPayment4}
-            onDownPaymentChange={handleDownPaymentChange}
-            onDownPaymentUnitChange={handleDownPaymentUnitChange}
-            onInterestRateChange={setInterestRate}
-            onLoanTermChange={setLoanTerm}
-            onPrincipalChange={setPrincipal}
-            inputsDisabled={inputsDisabled}
-          />
-          <div className="flex mt-4">
-            <button
-              className="cal-button bg-sky-900 hover:bg-slate-600 text-white font-bold py-2 px-4 rounded mr-2"
-              onClick={handleCalculate}
-              disabled={inputsDisabled}
-            >
-              Calculate
-            </button>
-            <button
-              className="reset-button bg-sky-800 hover:bg-slate-500 text-white font-bold py-2 px-4 rounded"
-              onClick={handleReset}
-            >
-              Reset
-            </button>
+        <div className="font-medium text-center text-lg mb-4">
+          Start Calculation
+        </div>
+        <MortgageForm
+          principal={principal}
+          interestRate={interestRate}
+          loanTerm={loanTerm}
+          downPayment={downPayment}
+          downPaymentUnit={downPaymentUnit}
+          extrapayment1={extraPayment1}
+          extrapayment2={extraPayment2}
+          extrapayment3={extraPayment3}
+          extrapayment4={extraPayment4}
+          onDownPaymentChange={handleDownPaymentChange}
+          onDownPaymentUnitChange={handleDownPaymentUnitChange}
+          onInterestRateChange={setInterestRate}
+          onLoanTermChange={setLoanTerm}
+          onPrincipalChange={setPrincipal}
+          onProvinceChange={handleProvinceChange}
+          selectedProvince={selectedProvince}
+          inputsDisabled={inputsDisabled}
+          provinces={provinces}
+          cities={cities}
+        />
+        <div className="flex mt-4">
+          <button
+            className="cal-button bg-sky-900 hover:bg-slate-600 text-white font-bold py-2 px-4 rounded mr-2"
+            onClick={handleCalculate}
+            disabled={inputsDisabled}
+          >
+            Calculate
+          </button>
+          <button
+            className="reset-button bg-sky-800 hover:bg-slate-500 text-white font-bold py-2 px-4 rounded"
+            onClick={handleReset}
+          >
+            Reset
+          </button>
         </div>
       </div>
       <div className="w-1/2 p-8">
@@ -444,6 +511,12 @@ const MortgageCalculator: React.FC = () => {
             perSemiMonthyearlyPayments={perSemiMonthyearlyPayments}
             perBiWeekyearlyPayments={perBiWeekyearlyPayments}
             isCalculated={isCalculated}
+            provinceTax={provinceTax}
+          />
+          <TaxCalculator
+            selectedProvince={selectedProvince}
+            principalAmount={principal}
+            updateTaxAmount={updateTaxAmount} // Pass the updateTaxAmount function
           />
         </div>
       </div>

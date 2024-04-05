@@ -42,6 +42,7 @@ interface MortgageResultsProps {
     }>
   > | null;
   isCalculated: boolean;
+  provinceTax: number | null;
 }
 
 interface PaymentPlan {
@@ -62,10 +63,12 @@ const MortgageResults: React.FC<MortgageResultsProps> = ({
   perSemiMonthyearlyPayments,
   perBiWeekyearlyPayments,
   isCalculated,
+  provinceTax,
 }) => {
-  const [selectedPaymentPlan,setSelectedPaymentPlan] = useState<keyof PaymentPlan>("monthly");
+  const [selectedPaymentPlan, setSelectedPaymentPlan] =
+    useState<keyof PaymentPlan>("monthly");
   const [currentYear, setCurrentYear] = useState(0);
-  
+
   const calculatePayments = (frequency: keyof PaymentPlan) => {
     let selectedYearlyPayments;
 
@@ -105,7 +108,6 @@ const MortgageResults: React.FC<MortgageResultsProps> = ({
         ))
       : null;
   };
-  
 
   const renderYearlyTotals = () => {
     const selectedYearlyPayments = calculatePayments(selectedPaymentPlan);
@@ -194,6 +196,12 @@ const MortgageResults: React.FC<MortgageResultsProps> = ({
         <div>
           <h3>Total Interest Paid:</h3>
           <p>${totalInterestPaid.toFixed(2)}</p>
+        </div>
+      )}
+      {provinceTax !== null && (
+        <div>
+          <h3>Total Provincial Tax:</h3>
+          <p>${provinceTax.toFixed(2)}</p>
         </div>
       )}
       <div>
@@ -289,5 +297,3 @@ const MortgageResults: React.FC<MortgageResultsProps> = ({
 };
 
 export default MortgageResults;
-
-

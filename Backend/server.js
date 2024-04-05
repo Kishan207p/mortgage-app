@@ -6,6 +6,7 @@ const dotenv = require('dotenv');
 const ProvinceModel = require("./models/ProvinceModel");
 const CityModel = require("./models/CityModel");
 const DocumentTypeModel = require("./models/DocumentTypes");
+const ProvinceTaxModel = require("./models/ProvinceTaxModel")
 
 const app = express();
 const PORT = 5000;
@@ -65,7 +66,30 @@ app.get("/api/cities/:province_id", async (req, res) => {
   }
 });
 
-app.get("/api/documents", async (req, res) => {
+app.get("/api/provinceTax", async (req, res) => {
+  try {
+    const provinceTax = await ProvinceTaxModel.find();
+    res.json(provinceTax);
+  } catch (error) {
+    console.error("Error fetching TAX:", error);
+    res.status(500).json({ error: "Failed to fetch provinces" });
+  }
+});
+
+app.get("/api/provinceTax/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const provinceTax = await ProvinceTaxModel.find({ province_id: parseInt(id) });
+    res.json(provinceTax);
+  } catch (error) {
+    console.error("Error fetching province tax:", error);
+    res.status(500).json({ error: "Failed to fetch province tax" });
+  }
+});
+
+
+app.get("/api/documents", async (_req, res) => {
   try {
     const documentTypes = await DocumentTypeModel.find();
     res.json({ documentTypes });

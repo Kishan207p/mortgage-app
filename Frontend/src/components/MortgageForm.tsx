@@ -1,15 +1,9 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 
 interface Province {
   province_id: number;
   code: string;
   description: string;
-}
-
-interface ProvinceCity {
-  province_id: number;
-  cities: City[];
 }
 
 interface City {
@@ -35,6 +29,10 @@ interface MortgageFormProps {
   onLoanTermChange: (value: number) => void;
   onPrincipalChange: (value: number) => void;
   inputsDisabled: boolean;
+  provinces: Province[];
+  cities: City[];
+  selectedProvince: number | null;
+  onProvinceChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 const MortgageForm: React.FC<MortgageFormProps> = ({
@@ -53,53 +51,12 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
   onLoanTermChange,
   onPrincipalChange,
   inputsDisabled,
+  provinces,
+  cities,
+  selectedProvince,
+  onProvinceChange,
 }) => {
   const [showExtraFields, setShowExtraFields] = useState(false);
-  const [provinces, setProvinces] = useState<Province[]>([]);
-  const [cities, setCities] = useState<City[]>([]);
-  const [selectedProvince, setSelectedProvince] = useState<number | null>(null);
-
-  useEffect(() => {
-    // Fetch provinces from backend API
-    axios
-      .get<Province[]>("http://localhost:5000/api/provinces")
-      .then((response) => {
-        setProvinces(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching provinces:", error);
-      });
-  }, []);
-
-  useEffect(() => {
-    if (selectedProvince !== null) {
-      // Fetch cities for the selected province from backend API
-      // Inside the useEffect hook where cities are fetched
-      axios
-        .get<ProvinceCity[]>(
-          `http://localhost:5000/api/cities/${selectedProvince}`
-        )
-        .then((response) => {
-          console.log("Cities response:", response.data); // Log the response data
-          // Extract the cities array from the response
-          const citiesArray = response.data[0].cities;
-          // Set the cities state with the extracted array
-          setCities(citiesArray);
-        })
-        .catch((error) => {
-          console.error("Error fetching cities:", error);
-        });
-    }
-  }, [selectedProvince]);
-
-  const handleProvinceChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    console.log(event.target.value);
-
-    const provinceId = parseInt(event.target.value);
-    setSelectedProvince(provinceId);
-  };
 
   return (
     <div className="font-medium font-sans">
@@ -107,7 +64,7 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
         <label className="font-medium font-sans">Principal:</label>
         <input
           type="number"
-          value={principal}
+          value={Number(principal).toString()}
           onChange={(e) => {
             if (e.target instanceof HTMLInputElement) {
               onPrincipalChange(Number(e.target.value));
@@ -122,7 +79,7 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
         <label>Interest Rate:</label>
         <input
           type="number"
-          value={interestRate}
+          value={Number(interestRate).toString()}
           onChange={(e) => {
             if (e.target instanceof HTMLInputElement) {
               onInterestRateChange(Number(e.target.value));
@@ -137,7 +94,7 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
         <label>Loan Term:</label>
         <input
           type="number"
-          value={loanTerm}
+          value={Number(loanTerm).toString()}
           onChange={(e) => {
             if (e.target instanceof HTMLInputElement) {
               onLoanTermChange(Number(e.target.value));
@@ -184,7 +141,7 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
             <label>Province:</label>
             <select
               value={selectedProvince ?? ""}
-              onChange={handleProvinceChange}
+              onChange={onProvinceChange}
               disabled={inputsDisabled}
               className="w-full border rounded-md font-normal"
             >
@@ -218,7 +175,7 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
           <label>Extra1:</label>
           <input
             type="number"
-            value={extrapayment1}
+            value={Number(extrapayment1).toString()}
             disabled={inputsDisabled}
             className="w-full mb-2 border border-gray-500 rounded-md"
           />
@@ -226,7 +183,7 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
           <label>Extra2:</label>
           <input
             type="number"
-            value={extrapayment2}
+            value={Number(extrapayment2).toString()}
             disabled={inputsDisabled}
             className="w-full mb-2 border border-gray-500 rounded-md"
           />
@@ -234,7 +191,7 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
           <label>Extra3:</label>
           <input
             type="number"
-            value={extrapayment3}
+            value={Number(extrapayment3).toString()}
             disabled={inputsDisabled}
             className="w-full mb-2 border border-gray-500 rounded-md"
           />
@@ -242,7 +199,7 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
           <label>Extra4:</label>
           <input
             type="number"
-            value={extrapayment4}
+            value={Number(extrapayment4).toString()}
             disabled={inputsDisabled}
             className="w-full mb-2 border border-gray-500 rounded-md"
           />
