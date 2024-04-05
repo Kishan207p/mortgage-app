@@ -204,7 +204,7 @@ const PDFUpload: React.FC<PDFUploadProps> = () => {
                       <select
                         value={pdf.selectedPdfType}
                         onChange={(event) => handlePDFSelect(event, index)}
-                        className="p-2 mr-2 select-dropdown border border-gray-300 rounded-lg"
+                        className="p-2 mr-2 select-dropdown border font-sans border-gray-300 rounded-lg"
                       >
                         <option value="Default">Select Document Type</option>
                         {documentTypes[0]["Document Type"].map(
@@ -284,25 +284,20 @@ const PDFUpload: React.FC<PDFUploadProps> = () => {
                     <div id={`file-container-${index}`}>
                       <span
                         id={`file-name-${index}`}
-                        className="text-black-600"
+                        className="w-auto pl-1 text-black font-semibold font-sans"
                       >
                         {pdf.fileName}
                       </span>
                     </div>
                     {pdf.isLoading && (
-                      <div className="w-2/3 bg-gray-200 rounded-lg overflow-hidden">
+                      <div className="w-2/3 mt-2 bg-gray-200 rounded-full h-3.2 overflow-hidden">
                         <div
-                          className="bg-blue-500 h-6"
+                          className="bg-gray-700 h-3.2 text-xs font-medium text-white text-center p-0.5 leading-none"
                           style={{ width: `${pdf.uploadProgress}%` }}
-                        ></div>
+                        > {pdf.uploadProgress}%</div>
                       </div>
                     )}
                   </div>
-                  {pdf.isLoading && (
-                    <div className="text-sm text-gray-500 mt-1">
-                      {pdf.uploadProgress}% uploaded
-                    </div>
-                  )}
                 </div>
               </div>
             ))}
