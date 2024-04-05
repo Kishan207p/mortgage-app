@@ -136,3 +136,29 @@
     margin-top: 5px; /* Add spacing between button and text */
   }
   
+  @keyframes rotate360 {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .rotate-on-hover {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-out;;
+  }
+  
+  .rotate-on-hover:hover {
+    animation: rotate360 0.5s linear 1; /* Rotate infinitely on hover */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add radiant easing out shadow on hover */
+  }
+
+  .max-h-\[600px\] {
+    max-height: 600px; /* Set your desired max height */
+    overflow-y: auto; /* Enable vertical scrollbar if content overflows */
+  }
+
+  .max-h-\[600px\]::-webkit-scrollbar {
+    display: none; /* Hide the scrollbar for WebKit browsers (Chrome, Safari, etc.) */
+  }
