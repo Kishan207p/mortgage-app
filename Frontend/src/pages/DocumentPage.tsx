@@ -1,4 +1,3 @@
-// DocumentPage.tsx
 import React, { useState } from "react";
 import Steps from "../components/step";
 import CreateApplication from "../components/phases/CreateApplication";
@@ -15,7 +14,6 @@ import { IoCreateOutline } from "react-icons/io5";
 import Header from "../components/Header";
 
 const DocumentPage: React.FC = () => {
-  //const navigate = useNavigate();
   const [steps, setSteps] = useState([
     { path: "/", name: <IoCreateOutline />, completed: false },
     { path: "/creditcheck", name: "Credit Check", completed: false },
@@ -53,6 +51,33 @@ const DocumentPage: React.FC = () => {
     }
   };
 
+  const renderCurrentStep = () => {
+    switch (currentStep) {
+      case 0:
+        return <CreateApplication />;
+      case 1:
+        return <CreditCheck />;
+      case 2:
+        return <UploadDocuments />;
+      case 3:
+        return <LoanProcessing />;
+      case 4:
+        return <Underwriting />;
+      case 5:
+        return <RiskAssessment />;
+      case 6:
+        return <ConditionallyApproved />;
+      case 7:
+        return <ClearToClose />;
+      case 8:
+        return <Closing />;
+      case 9:
+        return <LoanFunded />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <>
       <Header />
@@ -63,16 +88,23 @@ const DocumentPage: React.FC = () => {
           handleNext={handleNextStep}
           handlePrevious={handlePreviousStep}
         />
-        {currentStep === 0 && <CreateApplication />}
-        {currentStep === 1 && <CreditCheck />}
-        {currentStep === 2 && <UploadDocuments />}
-        {currentStep === 3 && <LoanProcessing />}
-        {currentStep === 4 && <Underwriting />}
-        {currentStep === 5 && <RiskAssessment />}
-        {currentStep === 6 && <ConditionallyApproved />}
-        {currentStep === 7 && <ClearToClose />}
-        {currentStep === 8 && <Closing />}
-        {currentStep === 9 && <LoanFunded />}
+        {renderCurrentStep()}
+        <div className="mt-4 flex justify-end">
+          <button
+            className="px-4 py-2 bg-blue-500 text-white rounded mr-4"
+            onClick={handlePreviousStep}
+            disabled={currentStep === 0}
+          >
+            Previous
+          </button>
+          <button
+            className="px-4 py-2 bg-blue-500 text-white rounded"
+            onClick={handleNextStep}
+            disabled={currentStep === steps.length - 1}
+          >
+            Next
+          </button>
+        </div>
       </div>
     </>
   );

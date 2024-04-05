@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { IoCreateOutline, IoDocumentsOutline } from "react-icons/io5";
 import { FaCheck } from "react-icons/fa";
+import { IoCreateOutline, IoDocumentsOutline } from "react-icons/io5";
 import { MdCreditScore } from "react-icons/md";
 import { BsUpload, BsPen } from "react-icons/bs";
 import { BiFolder } from "react-icons/bi";
 import { GiHouseKeys } from "react-icons/gi";
 import { GoIssueClosed } from "react-icons/go";
 import { BiHome } from "react-icons/bi";
+import { MdAssessment } from "react-icons/md";
 
 interface StepProps {
   currentStep: number;
@@ -21,6 +22,7 @@ const ioCreateArray: JSX.Element[] = [
   <BsUpload />,
   <BiFolder />,
   <BsPen />,
+  <MdAssessment />,
   <IoDocumentsOutline />,
   <GiHouseKeys />,
   <GoIssueClosed />,
@@ -58,7 +60,7 @@ const Steps: React.FC<StepProps> = ({
         {steps.map((_step, index) => (
           <React.Fragment key={index}>
             <div
-              className={`w-7/12 h-12 flex items-center justify-center rounded-full border-2 ${
+              className={`w-12 h-12 flex items-center justify-center rounded-full border-2 ${
                 index <= currentStep
                   ? "bg-blue-500 border-blue-500"
                   : "border-gray-300"
@@ -79,7 +81,7 @@ const Steps: React.FC<StepProps> = ({
             </div>
             {index !== steps.length - 1 && (
               <div
-                className={`h-1 w-full ${
+                className={`h-1 w-8 ${
                   index + 1 <= currentStep ? "bg-blue-500" : "bg-gray-300"
                 }`}
               ></div>
@@ -87,36 +89,17 @@ const Steps: React.FC<StepProps> = ({
           </React.Fragment>
         ))}
       </div>
-      <div className="flex items-center justify-between w-4/5">
+      <div className="flex items-center justify-between w-4/5 mt-2">
         {steps.map((step, index) => (
           <span
             key={index}
-            className={`text-center ${
+            className={`text-center w-12 ${
               index === currentStep ? "text-blue-500" : "text-gray-500"
             }`}
           >
             {index === currentStep ? step.name : ""}
           </span>
         ))}
-      </div>
-      <div className="mt-4">
-        <button
-          className="px-4 py-2 bg-blue-500 text-white rounded"
-          onClick={handlePreviousStep}
-          disabled={currentStep === 0}
-        >
-          Previous
-        </button>
-        <button
-          className="px-4 py-2 bg-blue-500 text-white rounded"
-          onClick={() => {
-            toggleCompletion(currentStep);
-            handleNext();
-          }}
-          disabled={currentStep === steps.length - 1}
-        >
-          Next
-        </button>
       </div>
     </div>
   );
