@@ -1,11 +1,23 @@
+// DocumentPage.tsx
 import React, { useState } from 'react';
-import Progress from '../components/progress';
-
+import { useNavigate } from 'react-router-dom';
+import Steps from '../components/progress';
+import CreateApplication from '../components/phases/CreateApplication';
+import CreditCheck from '../components/phases/CreditCheck';
+import UploadDocuments from '../components/phases/UploadDocuments';
+import LoanProcessing from '../components/phases/LoanProcessing';
+import Underwriting from '../components/phases/Underwriting';
+import RiskAssessment from '../components/phases/RiskAssessment';
+import ConditionallyApproved from '../components/phases/ConditionallyApproved';
+import ClearToClose from '../components/phases/ClearToClose';
+import Closing from '../components/phases/Closing';
+import LoanFunded from '../components/phases/LoanFunded';
 
 const DocumentPage: React.FC = () => {
+  const navigate = useNavigate();
   const [steps, setSteps] = useState([
     { path: "/", name: "Create Application", completed: false },
-    { path: "/credit-check", name: "Credit Check", completed: false },
+    { path: "/creditcheck", name: "Credit Check", completed: false },
     { path: "/upload-documents", name: "Upload Documents", completed: false },
     { path: "/loan-processing", name: "Loan Processing", completed: false },
     { path: "/underwriting", name: "Underwriting", completed: false },
@@ -15,6 +27,7 @@ const DocumentPage: React.FC = () => {
     { path: "/closing", name: "Closing", completed: false },
     { path: "/loan-funded", name: "Loan Funded", completed: false }
   ]);
+
   const [currentStep, setCurrentStep] = useState(0);
 
   const handleNextStep = () => {
@@ -36,12 +49,24 @@ const DocumentPage: React.FC = () => {
   };
 
   return (
-    <Progress 
-      currentStep={currentStep} 
-      steps={steps} 
-      handleNext={handleNextStep} 
-      handlePrevious={handlePreviousStep} 
-    />
+    <>
+      <Steps 
+        currentStep={currentStep} 
+        steps={steps} 
+        handleNext={handleNextStep} 
+        handlePrevious={handlePreviousStep} 
+      />
+      {currentStep === 0 && <CreateApplication />}
+      {currentStep === 1 && <CreditCheck />}
+      {currentStep === 2 && <UploadDocuments />}
+      {currentStep === 3 && <LoanProcessing />}
+      {currentStep === 4 && <Underwriting />}
+      {currentStep === 5 && <RiskAssessment />}
+      {currentStep === 6 && <ConditionallyApproved />}
+      {currentStep === 7 && <ClearToClose />}
+      {currentStep === 8 && <Closing />}
+      {currentStep === 9 && <LoanFunded />}
+    </>
   );
 };
 

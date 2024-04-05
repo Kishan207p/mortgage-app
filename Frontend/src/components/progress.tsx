@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Steps from './step';
+import Steps from './step'; // Assuming the filename is Steps.tsx
 import CreateApplication from './phases/CreateApplication';
 import CreditCheck from './phases/CreditCheck';
 import UploadDocuments from './phases/UploadDocuments';
@@ -11,6 +11,7 @@ import ConditionallyApproved from './phases/ConditionallyApproved';
 import ClearToClose from './phases/ClearToClose';
 import Closing from './phases/Closing';
 import LoanFunded from './phases/LoanFunded';
+
 
 interface StepProps {
   currentStep: number;
@@ -30,7 +31,7 @@ const Progress: React.FC<StepProps> = ({ currentStep, steps, handleNext, handleP
       />
       <Routes>
         <Route path="/" element={<CreateApplication />} />
-        <Route path="/credit-check" element={<CreditCheck />} />
+        <Route path="/creditcheck" element={<CreditCheck />} />
         <Route path="/upload-documents" element={<UploadDocuments />} />
         <Route path="/loan-processing" element={<LoanProcessing />} />
         <Route path="/underwriting" element={<Underwriting />} />
