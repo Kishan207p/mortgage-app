@@ -1,5 +1,6 @@
 // CreateApplication.tsx
 import React from "react";
+import PDFUpload from "../../components/PDFUpload";
 
 interface UploadDocumentsProps {
   // Define props here if any
@@ -8,10 +9,7 @@ interface UploadDocumentsProps {
 const UploadDocuments: React.FC<UploadDocumentsProps> = () => {
   return (
     <div>
-      <h1>Upload Document</h1>
-      {
-        
-      }
+      <PDFUpload />
     </div>
   );
 };

@@ -24,7 +24,6 @@ const App: React.FC = () => {
             <Route path="/comparison" element={<ComparisonPage />} />
             <Route path="/contactus" element={<ContactUsPage />} />
             <Route path="/aboutus" element={<AboutUsPage />} />
-            <Route path="/pdf" element={<PDFUploadPage />} />
           </Routes>
         </div>
       </div>
