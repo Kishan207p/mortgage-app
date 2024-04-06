@@ -35,51 +35,9 @@ button {
   margin: 0 auto;
 }
 
-/* Style for the Mortgage Payment Plan Tables */
-/* .payment-plan-table {
-  width: 100%;
-  margin-top: 20px;
-  border-collapse: collapse;
-} */
-
-/* .payment-plan-table th,
-.payment-plan-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
-} */
-
 .payment-plan-table tr:nth-child(even) {
   background-color: #f9f9f9;
 }
-
-/* .payment-plan-table tr:hover {
-  background-color: #f2f2f2;
-} */
-
-/* Style for the row indices */
-/* .payment-plan-table th.index {
-  width: 50px;
-} */
-
-/* Style for the year totals */
-/* .payment-plan-table tr.total {
-  background-color: #ffc107;
-  font-weight: bold;
-} */
-
-/* .payment-plan-table td.total {
-  background-color: #ffeeba;
-} */
-
-/* .clearfix {
-  display: flex;
-} */
-
-/* .mortgage-results-container {
-  width: 80%;
-  padding-left: 2rem; Add padding for better spacing
-} */
 
 @keyframes rotate360 {
   0% {

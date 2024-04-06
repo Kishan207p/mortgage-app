@@ -1,7 +1,27 @@
 [
   {
     "province_id": 1,
-    "citiesTax": []
+    "citiesTax": [
+      { "city_id": 1, "city_tax": null },
+      { "city_id": 2, "city_tax": null },
+      { "city_id": 3, "city_tax": null },
+      { "city_id": 4, "city_tax": null },
+      { "city_id": 5, "city_tax": null },
+      { "city_id": 6, "city_tax": null },
+      { "city_id": 7, "city_tax": null },
+      { "city_id": 8, "city_tax": null },
+      { "city_id": 9, "city_tax": null },
+      { "city_id": 10, "city_tax": null },
+      { "city_id": 11, "city_tax": null },
+      { "city_id": 12, "city_tax": null },
+      { "city_id": 13, "city_tax": null },
+      { "city_id": 14, "city_tax": null },
+      { "city_id": 15, "city_tax": null },
+      { "city_id": 16, "city_tax": null },
+      { "city_id": 17, "city_tax": null },
+      { "city_id": 18, "city_tax": null },
+      { "city_id": 19, "city_tax": null }
+    ]
   },
   {
     "province_id": 2,

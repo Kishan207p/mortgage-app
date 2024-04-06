@@ -56,13 +56,8 @@ const Steps: React.FC<StepProps> = ({
 
   return (
     <div className="flex flex-col items-center">
-<<<<<<< Updated upstream
-      <div className="flex items-center justify-between w-4/5">
-        {steps.map((_step, index) => (
-=======
       <div className="flex items-center">
         {steps.map((step, index) => (
->>>>>>> Stashed changes
           <React.Fragment key={index}>
             <div className="flex flex-col items-center">
               <div
@@ -84,11 +79,10 @@ const Steps: React.FC<StepProps> = ({
                   )}
                 </span>
               </div>
-             
             </div>
             <span className="text-xs mt-2 text-center whitespace-wrap">
-                {step.name}
-              </span>
+              {step.name}
+            </span>
             {index !== steps.length - 1 && (
               <div
                 className={`h-1 w-16 ${

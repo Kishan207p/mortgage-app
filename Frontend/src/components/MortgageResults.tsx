@@ -278,7 +278,6 @@ const MortgageResults: React.FC<MortgageResultsProps> = ({
           )}
         </div>
         <div className="payment-plan-container w-4/5">
-          {" "}
           <div className="border border-solid justify-content-center text-center p-2">
             <h3 className="text-lg font-bold mb-3">Payment Plan Options:</h3>
             <button

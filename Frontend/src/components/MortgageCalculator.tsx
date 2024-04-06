@@ -385,24 +385,24 @@ const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({
     }
   };
 
-  const handleDownPaymentUnitChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const value = (e.target as HTMLSelectElement).value;
-    setDownPaymentUnit(value);
+  // const handleDownPaymentUnitChange = (e: ChangeEvent<HTMLSelectElement>) => {
+  //   const value = (e.target as HTMLSelectElement).value;
+  //   setDownPaymentUnit(value);
 
-    if (value === "%") {
-      // Convert down payment to percentage
-      const downPaymentPercentage = (parseFloat(downPayment) / principal) * 100;
-      setDownPayment(
-        isFinite(downPaymentPercentage) ? downPaymentPercentage.toString() : ""
-      );
-    } else {
-      // Convert down payment to dollars
-      const downPaymentInDollars = (parseFloat(downPayment) * principal) / 100;
-      setDownPayment(
-        isFinite(downPaymentInDollars) ? downPaymentInDollars.toString() : ""
-      );
-    }
-  };
+  //   if (value === "%") {
+  //     // Convert down payment to percentage
+  //     const downPaymentPercentage = (parseFloat(downPayment) / principal) * 100;
+  //     setDownPayment(
+  //       isFinite(downPaymentPercentage) ? downPaymentPercentage.toString() : ""
+  //     );
+  //   } else {
+  //     // Convert down payment to dollars
+  //     const downPaymentInDollars = (parseFloat(downPayment) * principal) / 100;
+  //     setDownPayment(
+  //       isFinite(downPaymentInDollars) ? downPaymentInDollars.toString() : ""
+  //     );
+  //   }
+  // };
 
   useEffect(() => {
     // Fetch provinces from backend API
@@ -468,6 +468,8 @@ const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({
     setIsCalculated(false);
     setInputsDisabled(false);
     setSelectedProvince(null);
+    setProvinceTax(null);
+    setCityTax(null);
   };
 
   return (
@@ -489,13 +491,11 @@ const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({
           interestRate={interestRate}
           loanTerm={loanTerm}
           downPayment={downPayment}
-          downPaymentUnit={downPaymentUnit}
           extrapayment1={extraPayment1}
           extrapayment2={extraPayment2}
           extrapayment3={extraPayment3}
           extrapayment4={extraPayment4}
           onDownPaymentChange={handleDownPaymentChange}
-          onDownPaymentUnitChange={handleDownPaymentUnitChange}
           onInterestRateChange={setInterestRate}
           onLoanTermChange={setLoanTerm}
           onPrincipalChange={setPrincipal}

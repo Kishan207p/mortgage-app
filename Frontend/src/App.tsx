@@ -1,14 +1,13 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import SideBar from './components/SideBar';
-import CalculatorPage from './pages/CalculatorPage';
-import DocumentPage from './pages/DocumentPage';
-import ComparisonPage from './pages/ComparisonPage';
-import HomePage from './pages/HomePage'
-import './App.css'
-import ContactUsPage from './pages/ContactUsPage';
-import AboutUsPage from './pages/AboutUsPage'
-import PDFUploadPage from './pages/PDFUploadPage';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import SideBar from "./components/SideBar";
+import CalculatorPage from "./pages/CalculatorPage";
+import DocumentPage from "./pages/DocumentPage";
+import ComparisonPage from "./pages/ComparisonPage";
+import HomePage from "./pages/HomePage";
+import "./App.css";
+import ContactUsPage from "./pages/ContactUsPage";
+import AboutUsPage from "./pages/AboutUsPage";
 
 const App: React.FC = () => {
   return (
@@ -17,7 +16,7 @@ const App: React.FC = () => {
         <SideBar />
         <div className="flex-grow ml-40">
           <Routes>
-          <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<HomePage />} />
             <Route path="/Home" element={<HomePage />} />
             <Route path="/calculator" element={<CalculatorPage />} />
             <Route path="/document/*" element={<DocumentPage />} />

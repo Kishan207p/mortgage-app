@@ -16,15 +16,11 @@ interface MortgageFormProps {
   interestRate: number;
   loanTerm: number;
   downPayment: string;
-  downPaymentUnit: string;
   extrapayment1: string;
   extrapayment2: string;
   extrapayment3: string;
   extrapayment4: string;
   onDownPaymentChange: (value: React.ChangeEvent<HTMLInputElement>) => void;
-  onDownPaymentUnitChange: (
-    value: React.ChangeEvent<HTMLSelectElement>
-  ) => void;
   onInterestRateChange: (value: number) => void;
   onLoanTermChange: (value: number) => void;
   onPrincipalChange: (value: number) => void;
@@ -41,13 +37,11 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
   interestRate,
   loanTerm,
   downPayment,
-  downPaymentUnit,
   extrapayment1,
   extrapayment2,
   extrapayment3,
   extrapayment4,
   onDownPaymentChange,
-  onDownPaymentUnitChange,
   onInterestRateChange,
   onLoanTermChange,
   onPrincipalChange,
@@ -59,7 +53,26 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
   onCityChange,
 }) => {
   const [showExtraFields, setShowExtraFields] = useState(false);
+  const [downPaymentPercentage, setDownPaymentPercentage] = useState<number>(
+    parseFloat(downPayment)
+  );
+  const [downPaymentDollars, setDownPaymentDollars] = useState<number>(
+    (parseFloat(downPayment) * principal) / 100
+  );
 
+  const handlePercentageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const percentageValue = parseFloat(e.target.value);
+    setDownPaymentPercentage(percentageValue);
+    setDownPaymentDollars((percentageValue * principal) / 100);
+    onDownPaymentChange(e);
+  };
+
+  const handleDollarsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const dollarsValue = parseFloat(e.target.value);
+    setDownPaymentDollars(dollarsValue);
+    setDownPaymentPercentage((dollarsValue / principal) * 100);
+    onDownPaymentChange(e);
+  };
   return (
     <div className="font-medium font-sans">
       <div className="w-full">
@@ -107,7 +120,7 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
         />
       </div>
 
-      <div className="w-4/5 mb-3">
+      {/* <div className="w-4/5 mb-3">
         <label>Down Payment:</label>
         <div className="flex">
           <input
@@ -134,6 +147,35 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
             <option value="%">%</option>
             <option value="$">$</option>
           </select>
+        </div>
+      </div> */}
+
+      <div className="flex mb-2">
+        <div className="w-1/2 mr-2">
+          <label className="block">Down Payment:</label>
+          <div className="flex">
+            <input
+              type="number"
+              value={downPayment === "" ? "" : downPaymentPercentage}
+              onChange={handlePercentageChange}
+              disabled={inputsDisabled}
+              placeholder="in %"
+              className="w-full border border-gray-500 rounded-md px-1 mr-1"
+            />
+          </div>
+        </div>
+        <div className="w-1/2 ml-2">
+          <label className="block">&nbsp;</label>
+          <div className="flex">
+            <input
+              type="number"
+              value={downPayment === "" ? "" : downPaymentDollars}
+              onChange={handleDollarsChange}
+              disabled={inputsDisabled}
+              placeholder="in $"
+              className="w-full border border-gray-500 rounded-md px-1 mr-1"
+            />
+          </div>
         </div>
       </div>
 
