@@ -387,7 +387,7 @@ const MortgageResults: React.FC<MortgageResultsProps> = ({
             type="monotone"
             dataKey="loanAmountRemaining"
             stroke="red"
-            name="Loan/Mortgage Amount Paid"
+            name="Loan/Mortgage Balance"
           />
         </LineChart>
       )}
