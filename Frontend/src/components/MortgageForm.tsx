@@ -33,6 +33,7 @@ interface MortgageFormProps {
   cities: City[];
   selectedProvince: number | null;
   onProvinceChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  onCityChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 const MortgageForm: React.FC<MortgageFormProps> = ({
@@ -55,6 +56,7 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
   cities,
   selectedProvince,
   onProvinceChange,
+  onCityChange,
 }) => {
   const [showExtraFields, setShowExtraFields] = useState(false);
 
@@ -64,7 +66,7 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
         <label className="font-medium font-sans">Principal:</label>
         <input
           type="number"
-          value={principal === 0 ? '' : principal}
+          value={principal === 0 ? "" : principal}
           onChange={(e) => {
             if (e.target instanceof HTMLInputElement) {
               onPrincipalChange(Number(e.target.value));
@@ -79,7 +81,7 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
         <label>Interest Rate:</label>
         <input
           type="number"
-          value={interestRate === 0 ? '' : interestRate}
+          value={interestRate === 0 ? "" : interestRate}
           onChange={(e) => {
             if (e.target instanceof HTMLInputElement) {
               onInterestRateChange(Number(e.target.value));
@@ -94,7 +96,7 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
         <label>Loan Term:</label>
         <input
           type="number"
-          value={loanTerm === 0 ? '' : loanTerm}
+          value={loanTerm === 0 ? "" : loanTerm}
           onChange={(e) => {
             if (e.target instanceof HTMLInputElement) {
               onLoanTermChange(Number(e.target.value));
@@ -157,6 +159,7 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
             <label>City:</label>
             <select
               disabled={!selectedProvince || inputsDisabled}
+              onChange={onCityChange}
               className="w-full border rounded-md font-normal"
             >
               <option value="">Select City</option>

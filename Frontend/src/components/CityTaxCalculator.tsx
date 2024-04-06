@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-interface ProvinceTaxData {
+interface CityTaxData {
   land_transfer_tax?: {
     tax_brackets: TaxBracket[];
   };
@@ -15,11 +15,6 @@ interface ProvinceTaxData {
   };
 }
 
-interface pro_ProvinceTaxData {
-  province_id: number;
-  province_tax: ProvinceTaxData;
-}
-
 interface TaxBracket {
   from: number;
   to: number | null;
@@ -27,36 +22,42 @@ interface TaxBracket {
   rate: number;
 }
 
-interface TaxCalculatorProps {
-  selectedProvince: number | null;
-  principalAmount: number;
-  updateTaxAmount: (taxAmount: number) => void; // Add updateTaxAmount prop
+interface CityTaxBracket {
+  city_id: number;
+  city_tax: CityTaxData;
 }
 
-const TaxCalculator: React.FC<TaxCalculatorProps> = ({
+interface CityTaxCalculatorProps {
+  selectedProvince: number | null;
+  selectedCity: number | null;
+  principalAmount: number;
+  updateCityTaxAmount: (taxAmount: number) => void;
+}
+
+const CityTaxCalculator: React.FC<CityTaxCalculatorProps> = ({
   selectedProvince,
+  selectedCity,
   principalAmount,
-  updateTaxAmount, // Receive updateTaxAmount as prop
+  updateCityTaxAmount,
 }) => {
-  const [_taxAmount, setTaxAmount] = useState<number>(0);
+  const [_cityTaxAmount, setCityTaxAmount] = useState<number>(0);
 
   useEffect(() => {
-    if (selectedProvince) {
-      axios
-        .get<pro_ProvinceTaxData[]>(
-          `http://localhost:5000/api/provinceTax/${selectedProvince}`
-        )
-        .then((response) => {
-          const provinceTaxData = response.data[0].province_tax;
-          console.log(provinceTaxData);
+    const fetchCityTaxData = async () => {
+      if (selectedProvince && selectedCity) {
+        try {
+          const response = await axios.get<CityTaxBracket>(
+            `http://localhost:5000/api/cityTax/${selectedProvince}/${selectedCity}`
+          );
+          const cityTaxData = response.data.city_tax;
+          console.log(response.data);
 
           let tax = 0;
 
-          if (provinceTaxData) {
+          if (cityTaxData) {
             const { land_transfer_tax, property_registration_tax } =
-              provinceTaxData;
+              cityTaxData;
 
-            // Calculate land transfer tax
             if (land_transfer_tax) {
               const landTransferTaxBracket =
                 land_transfer_tax.tax_brackets.find((bracket: TaxBracket) => {
@@ -118,16 +119,18 @@ const TaxCalculator: React.FC<TaxCalculatorProps> = ({
 
           console.log(tax);
 
-          setTaxAmount(tax);
-          updateTaxAmount(tax);
-        })
-        .catch((error) => {
-          console.error("Error fetching tax data:", error);
-        });
-    }
-  }, [selectedProvince, principalAmount, updateTaxAmount]);
+          setCityTaxAmount(tax);
+          updateCityTaxAmount(tax);
+        } catch (error) {
+          console.error("Error fetching city tax data:", error);
+        }
+      }
+    };
+
+    fetchCityTaxData();
+  }, [selectedProvince, selectedCity, principalAmount, updateCityTaxAmount]);
 
   return null;
 };
 
-export default TaxCalculator;
+export default CityTaxCalculator;

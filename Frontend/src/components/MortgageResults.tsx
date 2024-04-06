@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+  CartesianGrid,
+} from "recharts";
 interface MortgageResultsProps {
   totalDownPayment: number | null;
   monthlyPayment: number | null;
@@ -43,6 +51,7 @@ interface MortgageResultsProps {
   > | null;
   isCalculated: boolean;
   provinceTax: number | null;
+  cityTax: number | null;
 }
 
 interface PaymentPlan {
@@ -64,6 +73,7 @@ const MortgageResults: React.FC<MortgageResultsProps> = ({
   perBiWeekyearlyPayments,
   isCalculated,
   provinceTax,
+  cityTax,
 }) => {
   const [selectedPaymentPlan, setSelectedPaymentPlan] =
     useState<keyof PaymentPlan>("monthly");
@@ -151,13 +161,58 @@ const MortgageResults: React.FC<MortgageResultsProps> = ({
       : null;
   };
 
+  const generateChartData = () => {
+    let yearlyTotals: {
+      year: number;
+      principalPaid: number;
+      interestPaid: number;
+      loanAmountRemaining: number;
+    }[] = [];
+
+    let loanAmountRemaining = loanAmount!;
+    let totalInterestRemaining = totalInterestPaid!;
+    let accumulatedPrincipal = 0;
+    let accumulatedInterest = 0;
+
+    // Calculate yearly totals based on payment plan data
+    if (perMonthyearlyPayments) {
+      perMonthyearlyPayments.forEach((payments, year) => {
+        const lastPayment = payments[payments.length - 1];
+
+        // Calculate principal and interest paid for this year
+        const principalPaid = lastPayment.accumulatedPrincipal;
+        const interestPaid = lastPayment.accumulatedInterest;
+
+        // Update accumulated principal and accumulated interest
+        accumulatedPrincipal += principalPaid;
+        accumulatedInterest += interestPaid;
+
+        // Update loan amount remaining and total interest remaining
+        loanAmountRemaining -= principalPaid;
+        totalInterestRemaining -= interestPaid;
+
+        yearlyTotals.push({
+          year: year + 1,
+          principalPaid: parseFloat(accumulatedPrincipal.toFixed(2)),
+          interestPaid: parseFloat(accumulatedInterest.toFixed(2)),
+          loanAmountRemaining: parseFloat(loanAmountRemaining.toFixed(2)),
+        });
+      });
+    }
+
+    return yearlyTotals;
+  };
+
+  // Data for the chart
+  const chartData = generateChartData();
+
   // const [selectedPaymentPlan,setSelectedPaymentPlan] = useState<keyof PaymentPlan>("monthly");
   // setSelectedPaymentPlan(frequency);
 
   return (
     <div className="mortgage-results">
       <div className="mb-8">
-      {isCalculated && totalDownPayment !== null && (
+        {isCalculated && totalDownPayment !== null && (
           <div className="mt-4 ">
             <h3 className="text-md font-semibold">Total Down Payment:</h3>
             <p className="text-md">${totalDownPayment.toFixed(2)}</p>
@@ -199,12 +254,18 @@ const MortgageResults: React.FC<MortgageResultsProps> = ({
             <p className="text-md">${totalInterestPaid.toFixed(2)}</p>
           </div>
         )}
-          {provinceTax !== null && (
-        <div  className="mt-4">
-          <h3 className="text-md font-semibold">Total Provincial Tax:</h3>
-          <p className="text-md">${provinceTax.toFixed(2)}</p>
-        </div>
-      )}
+        {provinceTax !== null && (
+          <div className="mt-4">
+            <h3 className="text-md font-semibold">Total Provincial Tax:</h3>
+            <p className="text-md">${provinceTax.toFixed(2)}</p>
+          </div>
+        )}
+        {cityTax !== null && (
+          <div className="mt-4">
+            <h3 className="text-md font-semibold">Total Municipal Tax:</h3>
+            <p className="text-md">${cityTax.toFixed(2)}</p>
+          </div>
+        )}
       </div>
 
       <div className="border justify-content-center text-center p-2">
@@ -297,6 +358,38 @@ const MortgageResults: React.FC<MortgageResultsProps> = ({
             </tbody>
           </table>
         </div>
+      )}
+      {chartData.length > 0 && (
+        <LineChart
+          width={600}
+          height={300}
+          data={chartData}
+          margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+        >
+          <XAxis dataKey="year" />
+          <YAxis />
+          <CartesianGrid strokeDasharray="3 3" />
+          <Tooltip />
+          <Legend />
+          <Line
+            type="monotone"
+            dataKey="principalPaid"
+            stroke="blue"
+            name="Principal Paid"
+          />
+          <Line
+            type="monotone"
+            dataKey="interestPaid"
+            stroke="green"
+            name="Interest Paid"
+          />
+          <Line
+            type="monotone"
+            dataKey="loanAmountRemaining"
+            stroke="red"
+            name="Loan/Mortgage Amount Paid"
+          />
+        </LineChart>
       )}
     </div>
   );

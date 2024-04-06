@@ -1,0 +1,99 @@
+[
+  {
+    "province_id": 1,
+    "citiesTax": []
+  },
+  {
+    "province_id": 2,
+    "citiesTax": []
+  },
+  {
+    "province_id": 3,
+    "citiesTax": []
+  },
+  {
+    "province_id": 4,
+    "citiesTax": []
+  },
+  {
+    "province_id": 5,
+    "citiesTax": []
+  },
+  {
+    "province_id": 6,
+    "citiesTax": []
+  },
+  {
+    "province_id": 7,
+    "citiesTax": []
+  },
+  {
+    "province_id": 8,
+    "citiesTax": []
+  },
+  {
+    "province_id": 9,
+    "citiesTax": [
+      {
+        "city_id": 47,
+        "city_tax": {
+          "land_transfer_tax": {
+            "tax_brackets": [
+              {
+                "from": 0,
+                "to": 55000.0,
+                "rate": 0.005,
+                "fixed_amt": 0
+              },
+              {
+                "from": 55000.01,
+                "to": 250000,
+                "rate": 0.01,
+                "fixed_amt": 275
+              },
+              {
+                "from": 250000.01,
+                "to": 400000,
+                "rate": 0.015,
+                "fixed_amt": 2225
+              },
+              {
+                "from": 400000.01,
+                "to": 2000000,
+                "rate": 0.02,
+                "fixed_amt": 4475
+              },
+              {
+                "from": 2000000.01,
+                "to": null,
+                "rate": 0.025,
+                "fixed_amt": 36475
+              }
+            ]
+          },
+          "property_registration_tax": null
+        }
+      },
+      {
+        "city_id": 1,
+        "city_tax": null
+      }
+    ]
+  },
+  {
+    "province_id": 10,
+    "citiesTax": []
+  },
+  {
+    "province_id": 11,
+    "citiesTax": []
+  },
+  {
+    "province_id": 12,
+    "citiesTax": []
+  },
+  {
+    "province_id": 13,
+    "citiesTax": []
+  }
+]

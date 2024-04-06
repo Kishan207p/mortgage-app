@@ -2,9 +2,9 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import MortgageForm from "./MortgageForm";
 import MortgageResults from "./MortgageResults";
-import TaxCalculator from "./TaxCalculator";
+import ProvinceTaxCalculator from "./ProvinceTaxCalculator";
 import axios from "axios";
-
+import CityTaxCalculator from "./CityTaxCalculator";
 
 interface MortgageCalculatorProps {
   pageContext: "calculator" | "comparison"; // Define possible contexts
@@ -25,8 +25,9 @@ interface City {
   description: string;
 }
 
-const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({ pageContext }) => {
-
+const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({
+  pageContext,
+}) => {
   const [principal, setPrincipal] = useState<number>(0);
   const [interestRate, setInterestRate] = useState<number>(0);
   const [loanTerm, setLoanTerm] = useState<number>(0);
@@ -92,7 +93,8 @@ const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({ pageContext }) 
   const [cities, setCities] = useState<City[]>([]);
   const [selectedProvince, setSelectedProvince] = useState<number | null>(null);
   const [provinceTax, setProvinceTax] = useState<number | null>(null);
-
+  const [selectedCity, setSelectedCity] = useState<number | null>(null);
+  const [cityTax, setCityTax] = useState<number | null>(null);
 
   const handleCalculate = () => {
     setIsCalculated(true);
@@ -351,8 +353,12 @@ const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({ pageContext }) 
     setSelectedProvince(selectedProvince);
   };
 
-  const updateTaxAmount = (amount: number) => {
+  const updateProvinceTaxAmount = (amount: number) => {
     setProvinceTax(amount);
+  };
+
+  const updateCityTaxAmount = (amount: number) => {
+    setCityTax(amount);
   };
 
   const handleDownPaymentChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -412,8 +418,6 @@ const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({ pageContext }) 
 
   useEffect(() => {
     if (selectedProvince !== null) {
-      // Fetch cities for the selected province from backend API
-      // Inside the useEffect hook where cities are fetched
       axios
         .get<ProvinceCity[]>(
           `http://localhost:5000/api/cities/${selectedProvince}`
@@ -434,6 +438,11 @@ const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({ pageContext }) 
   ) => {
     const provinceId = parseInt(event.target.value);
     setSelectedProvince(provinceId);
+  };
+
+  const handleCityChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const cityId = parseInt(event.target.value);
+    setSelectedCity(cityId);
   };
 
   const handleReset = () => {
@@ -462,10 +471,15 @@ const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({ pageContext }) 
   };
 
   return (
-
-<div className={pageContext === "calculator" ? "flex" : "flex-col"}>
-<div className={`border border-t-slate-500 border-t-4 border-gray-300 px-5 py-5 bg-slate-100 shadow-md ml-4 rounded-lg mb-10 ${pageContext === "calculator" ? "w-1/3" : "w-full"}`}>
-    <div className="font-medium text-center text-lg mb-4">Start Calculation</div>
+    <div className={pageContext === "calculator" ? "flex" : "flex-col"}>
+      <div
+        className={`border border-t-slate-500 border-t-4 border-gray-300 px-5 py-5 bg-slate-100 shadow-md ml-4 rounded-lg mb-10 ${
+          pageContext === "calculator" ? "w-1/3" : "w-full"
+        }`}
+      >
+        <div className="font-medium text-center text-lg mb-4">
+          Start Calculation
+        </div>
         <MortgageForm
           principal={principal}
           interestRate={interestRate}
@@ -482,6 +496,7 @@ const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({ pageContext }) 
           onLoanTermChange={setLoanTerm}
           onPrincipalChange={setPrincipal}
           onProvinceChange={handleProvinceChange}
+          onCityChange={handleCityChange}
           selectedProvince={selectedProvince}
           inputsDisabled={inputsDisabled}
           provinces={provinces}
@@ -503,7 +518,13 @@ const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({ pageContext }) 
           </button>
         </div>
       </div>
-      <div className={pageContext === "calculator" ? "w-2/3 mx-8 p-8 bg-slate-300": "w-full bg-green-200"}>
+      <div
+        className={
+          pageContext === "calculator"
+            ? "w-2/3 mx-8 p-8 bg-slate-300"
+            : "w-full bg-green-200"
+        }
+      >
         <div className="mortgage-results-container">
           <MortgageResults
             totalDownPayment={totalDownPayment}
@@ -518,12 +539,23 @@ const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({ pageContext }) 
             perBiWeekyearlyPayments={perBiWeekyearlyPayments}
             isCalculated={isCalculated}
             provinceTax={provinceTax}
+            cityTax={cityTax}
           />
-          <TaxCalculator
-            selectedProvince={selectedProvince}
-            principalAmount={principal}
-            updateTaxAmount={updateTaxAmount} // Pass the updateTaxAmount function
-          />
+          {isCalculated && (
+            <>
+              <ProvinceTaxCalculator
+                selectedProvince={selectedProvince}
+                principalAmount={principal}
+                updateProvinceTaxAmount={updateProvinceTaxAmount}
+              />
+              <CityTaxCalculator
+                selectedProvince={selectedProvince}
+                selectedCity={selectedCity} // Pass selected city ID
+                principalAmount={principal}
+                updateCityTaxAmount={updateCityTaxAmount}
+              />
+            </>
+          )}
         </div>
       </div>
     </div>
