@@ -57,7 +57,7 @@ const Steps: React.FC<StepProps> = ({
   return (
     <div className="flex flex-col items-center">
       <div className="flex items-center justify-between w-4/5">
-        {steps.map((step, index) => (
+        {steps.map((_step, index) => (
           <React.Fragment key={index}>
             <div
               className={`w-12 h-12 flex items-center justify-center rounded-full border-2 ${

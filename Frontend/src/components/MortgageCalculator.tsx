@@ -471,10 +471,14 @@ const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({
   };
 
   return (
-    <div className={pageContext === "calculator" ? "flex" : "flex-col"}>
+    <div
+      className={
+        pageContext === "calculator" ? "flex flex-col lg:flex-row" : "flex-col"
+      }
+    >
       <div
         className={`border border-t-slate-500 border-t-4 border-gray-300 px-5 py-5 bg-slate-100 shadow-md ml-4 rounded-lg mb-10 ${
-          pageContext === "calculator" ? "w-1/3" : "w-full"
+          pageContext === "calculator" ? "lg:w-1/3 lg:mb-0" : "w-full"
         }`}
       >
         <div className="font-medium text-center text-lg mb-4">
@@ -504,14 +508,14 @@ const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({
         />
         <div className="flex mt-4">
           <button
-            className="cal-button bg-sky-900 hover:bg-slate-600 text-white font-bold py-2 px-4 rounded mr-2"
+            className="cal-button text-center bg-sky-900 hover:bg-slate-600 text-white font-bold py-2 px-4 rounded mr-2 w-1/2"
             onClick={handleCalculate}
             disabled={inputsDisabled}
           >
             Calculate
           </button>
           <button
-            className="reset-button bg-sky-800 hover:bg-slate-500 text-white font-bold py-2 px-4 rounded"
+            className="reset-button text-center bg-sky-800 hover:bg-slate-500 text-white font-bold py-2 px-4 rounded w-1/2"
             onClick={handleReset}
           >
             Reset
@@ -521,7 +525,7 @@ const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({
       <div
         className={
           pageContext === "calculator"
-            ? "w-2/3 mx-8 p-8 bg-slate-300"
+            ? "flex-grow mx-2 bg-slate-300 p-8"
             : "w-full bg-green-200"
         }
       >

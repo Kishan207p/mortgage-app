@@ -210,7 +210,7 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
       )}
 
       <div
-        className="show-more-text"
+        className="show-more-text cursor-pointer text-blue-500 "
         onClick={() => setShowExtraFields(!showExtraFields)}
       >
         {showExtraFields ? "Show Less" : "More"}

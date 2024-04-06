@@ -194,10 +194,11 @@ const PDFUpload: React.FC<PDFUploadProps> = () => {
                      focus:ring-blue-300 rotate-on-hover "
               >
                 <FaPlus className="text-lg" />
-                
               </button>
               <span className="absolute top-3 right-3 h-5 w-6 bg-white ring-[1.5px] ring-red-600 text-red-600 text-s font-semibold p-0 rounded-full">
-                <span className="relative bottom-1 left-1 items-center justify-center ">{pdfFiles.length}</span>
+                <span className="relative bottom-1 left-1 items-center justify-center ">
+                  {pdfFiles.length}
+                </span>
               </span>
             </div>
             <div className="pt-6 font-semibold text-xl font-sans">
@@ -260,7 +261,7 @@ const PDFUpload: React.FC<PDFUploadProps> = () => {
                     <button
                       onClick={() => handleUpload(index)}
                       disabled={pdf.isLoading}
-                      className={`p-3 mr-2 ml-2 rounded-2xl shadow-md  ${
+                      className={`p-3 mr-2 ml-2 rounded-2xl shadow-md hover:bg-[#63bef7] ${
                         pdf.isLoading ? "button-disabled" : ""
                       }`}
                     >
@@ -269,7 +270,7 @@ const PDFUpload: React.FC<PDFUploadProps> = () => {
                     <button
                       onClick={() => handleViewToggle(index)}
                       disabled={pdf.isLoading || !pdf.pdfFile}
-                      className={`p-3 mr-2 rounded-2xl shadow-md ${
+                      className={`p-3 mr-2 rounded-2xl shadow-md hover:bg-[#63bef7] ${
                         pdf.isLoading || !pdf.pdfFile || !pdf.isUploaded
                           ? "button-disabled"
                           : ""

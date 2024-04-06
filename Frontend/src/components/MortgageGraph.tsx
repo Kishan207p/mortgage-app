@@ -1,64 +1,58 @@
-import React, { useEffect, useRef } from "react";
-import Chart, { ChartType, InteractionMode } from "chart.js";
+import React from "react";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+  CartesianGrid,
+} from "recharts";
 
-interface MortgageGraphProps {
-  data: {
-    labels: string[];
-    principalPaid: number[];
-    interestPaid: number[];
-    loanAmountPaid: number[];
-  };
+interface GraphDataItem {
+  year: number;
+  principalPaid: number;
+  interestPaid: number;
+  loanAmountRemaining: number;
 }
 
-const MortgageGraph: React.FC<MortgageGraphProps> = ({ data }) => {
-  const chartRef = useRef<HTMLCanvasElement>(null);
+interface MortgageChartProps {
+  GraphData: GraphDataItem[];
+}
 
-  useEffect(() => {
-    if (chartRef && chartRef.current) {
-      const ctx = chartRef.current.getContext("2d");
-      if (!ctx) return;
-
-      const chartConfig: Chart.ChartConfiguration = {
-        type: "line" as ChartType,
-        data: {
-          labels: data.labels,
-          datasets: [
-            {
-              label: "Principal Paid",
-              borderColor: "blue",
-              data: data.principalPaid,
-            },
-            {
-              label: "Interest Paid",
-              borderColor: "green",
-              data: data.interestPaid,
-            },
-            {
-              label: "Loan/Mortgage Amount Paid",
-              borderColor: "red",
-              data: data.loanAmountPaid,
-            },
-          ],
-        },
-        options: {
-          interaction: {
-            mode: "index" as InteractionMode,
-            intersect: false,
-          },
-          plugins: {
-            tooltip: {
-              mode: "index" as InteractionMode,
-              intersect: false,
-            },
-          },
-        },
-      };
-
-      new Chart(ctx, chartConfig);
-    }
-  }, [data]);
-
-  return <canvas ref={chartRef} />;
+const MortgageGraph: React.FC<MortgageChartProps> = ({ GraphData }) => {
+  return (
+    <LineChart
+      width={600}
+      height={300}
+      data={GraphData}
+      margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+    >
+      <XAxis dataKey="year" />
+      <YAxis />
+      <CartesianGrid strokeDasharray="3 3" />
+      <Tooltip />
+      <Legend />
+      <Line
+        type="monotone"
+        dataKey="principalPaid"
+        stroke="blue"
+        name="Principal Paid"
+      />
+      <Line
+        type="monotone"
+        dataKey="interestPaid"
+        stroke="green"
+        name="Interest Paid"
+      />
+      <Line
+        type="monotone"
+        dataKey="loanAmountRemaining"
+        stroke="red"
+        name="Loan/Mortgage Balance"
+      />
+    </LineChart>
+  );
 };
 
 export default MortgageGraph;
