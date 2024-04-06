@@ -11,7 +11,7 @@ import { MdAssessment } from "react-icons/md";
 
 interface StepProps {
   currentStep: number;
-  steps: { name: any; completed: boolean; path: string }[];
+  steps: { name: string; completed: boolean; path: string }[];
   handleNext: () => void;
   handlePrevious: () => void;
 }
@@ -56,52 +56,47 @@ const Steps: React.FC<StepProps> = ({
 
   return (
     <div className="flex flex-col items-center">
+<<<<<<< Updated upstream
       <div className="flex items-center justify-between w-4/5">
         {steps.map((_step, index) => (
+=======
+      <div className="flex items-center">
+        {steps.map((step, index) => (
+>>>>>>> Stashed changes
           <React.Fragment key={index}>
-            <div
-              className={`w-12 h-12 flex items-center justify-center rounded-full border-2 ${
-                index <= currentStep
-                  ? "bg-blue-500 border-blue-500"
-                  : "border-gray-300"
-              }`}
-            >
-              <span
-                className={`text-lg ${
-                  index <= currentStep ? "text-white" : "text-gray-500"
+            <div className="flex flex-col items-center">
+              <div
+                className={`w-100px h-50px flex items-center justify-center rounded-full border-8 ${
+                  index <= currentStep
+                    ? "bg-blue-500 border-blue-500"
+                    : "border-gray-300"
                 }`}
               >
-                {completedSteps.includes(index) ? (
-                  <FaCheck style={{ color: "white" }} />
-                ) : (
-                  ioCreateArray[index]
-                )}
-              </span>
+                <span
+                  className={`text-lg ${
+                    index <= currentStep ? "text-white" : "text-gray-500"
+                  }`}
+                >
+                  {completedSteps.includes(index) ? (
+                    <FaCheck style={{ color: "white" }} />
+                  ) : (
+                    ioCreateArray[index]
+                  )}
+                </span>
+              </div>
+             
             </div>
+            <span className="text-xs mt-2 text-center whitespace-wrap">
+                {step.name}
+              </span>
             {index !== steps.length - 1 && (
               <div
-                className={`h-1 w-full ${
+                className={`h-1 w-16 ${
                   index + 1 <= currentStep ? "bg-blue-500" : "bg-gray-300"
                 }`}
               ></div>
             )}
           </React.Fragment>
-        ))}
-      </div>
-      <div className="flex items-center justify-between w-4/5 mt-2">
-        {steps.map((step, index) => (
-          <span
-            key={index}
-            className={`text-center w-12 ${
-              index === currentStep ? "text-blue-500" : "text-gray-500"
-            }`}
-          >
-            {index === currentStep && (
-              <div style={{ maxWidth: "100%", textAlign: "center" }}>
-                {step.name}
-              </div>
-            )}
-          </span>
         ))}
       </div>
     </div>
