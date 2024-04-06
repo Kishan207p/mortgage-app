@@ -219,174 +219,168 @@ const MortgageResults: React.FC<MortgageResultsProps> = ({
   // setSelectedPaymentPlan(frequency);
 
   return (
-    <div className="mortgage-results">
-      <div className="mb-8">
-        {isCalculated && totalDownPayment !== null && (
-          <div className="mt-4 ">
-            <h3 className="text-md font-semibold">Total Down Payment:</h3>
-            <p className="text-md">${totalDownPayment.toFixed(2)}</p>
-          </div>
-        )}
-        {monthlyPayment !== null && (
-          <div className="mt-4">
-            <h3 className="text-md font-semibold">Monthly Payment:</h3>
-            <p className="text-md">${monthlyPayment.toFixed(2)}</p>
-          </div>
-        )}
-        {biWeeklyPayment !== null && (
-          <div className="mt-4">
-            <h3 className="text-md font-semibold">Bi-Weekly Payment:</h3>
-            <p className="text-md">${biWeeklyPayment.toFixed(2)}</p>
-          </div>
-        )}
-        {semiMonthlyPayment !== null && (
-          <div className="mt-4">
-            <h3 className="text-md font-semibold">Semi-Monthly Payment:</h3>
-            <p className="text-md">${semiMonthlyPayment.toFixed(2)}</p>
-          </div>
-        )}
-        {loanAmount !== null && (
-          <div className="mt-4">
-            <h3 className="text-md font-semibold">Loan Amount:</h3>
-            <p className="text-md">${loanAmount.toFixed(2)}</p>
-          </div>
-        )}
-        {totalPaidMortgage !== null && (
-          <div className="mt-4">
-            <h3 className="text-md font-semibold">Total Paid Mortgage:</h3>
-            <p className="text-md">${totalPaidMortgage.toFixed(2)}</p>
-          </div>
-        )}
-        {totalInterestPaid !== null && (
-          <div className="mt-4">
-            <h3 className="text-md font-semibold">Total Interest Paid:</h3>
-            <p className="text-md">${totalInterestPaid.toFixed(2)}</p>
-          </div>
-        )}
-        {provinceTax !== null && (
-          <div className="mt-4">
-            <h3 className="text-md font-semibold">Total Provincial Tax:</h3>
-            <p className="text-md">${provinceTax.toFixed(2)}</p>
-          </div>
-        )}
-        {cityTax !== null && (
-          <div className="mt-4">
-            <h3 className="text-md font-semibold">Total Municipal Tax:</h3>
-            <p className="text-md">${cityTax.toFixed(2)}</p>
-          </div>
-        )}
-      </div>
-
-      <div className="border justify-content-center text-center p-2">
-        <h3 className="text-lg font-bold mb-3">Payment Plan Options:</h3>
-        <button
-          style={{
-            backgroundColor:
-              selectedPaymentPlan === "monthly" ? "lightblue" : "initial",
-          }}
-          onClick={() => calculatePayments("monthly")}
-          className="p-2 mr-3 font-semibold bg-slate-500 hover:bg-slate-600"
-        >
-          Monthly
-        </button>
-        <button
-          style={{
-            backgroundColor:
-              selectedPaymentPlan === "semiMonthly" ? "lightblue" : "initial",
-          }}
-          onClick={() => calculatePayments("semiMonthly")}
-          className="p-2 mr-3 font-semibold"
-        >
-          Semi-Monthly
-        </button>
-        <button
-          style={{
-            backgroundColor:
-              selectedPaymentPlan === "biWeekly" ? "lightblue" : "initial",
-          }}
-          onClick={() => calculatePayments("biWeekly")}
-          className="p-2 mr-3 font-semibold"
-        >
-          Bi-Weekly
-        </button>
-      </div>
-      {renderPaymentPlan() !== null && (
-        <div>
-          <h3 className="text-center">
-            <button
-              onClick={() => setCurrentYear(0)}
-              disabled={currentYear === 0}
-              className="mx-2"
-            >
-              First
-            </button>
-            <button
-              onClick={() => setCurrentYear(currentYear - 1)}
-              disabled={currentYear === 0}
-              className="mx-2"
-            >
-              ←
-            </button>
-            Year {currentYear + 1} Payment Plan
-            <button
-              onClick={() => setCurrentYear(currentYear + 1)}
-              disabled={
-                currentYear ===
-                calculatePayments(selectedPaymentPlan).length - 1
-              }
-              className="mx-2"
-            >
-              →
-            </button>
-            <button
-              onClick={() =>
-                setCurrentYear(
-                  calculatePayments(selectedPaymentPlan).length - 1
-                )
-              }
-              disabled={
-                currentYear ===
-                calculatePayments(selectedPaymentPlan).length - 1
-              }
-              className="mx-2"
-            >
-              Last
-            </button>
-          </h3>
-          <table className="payment-plan-table w-full mt-20 border-collapse">
-            <thead>
-              <tr>
-                <th className="border border-solid border-[#ddd] bg-[#f2f2f2] py-2 px-4">
-                  Index
-                </th>
-                <th className="border border-solid border-[#ddd] bg-[#f2f2f2] py-2 px-4">
-                  Date
-                </th>
-                <th className="border border-solid border-[#ddd] bg-[#f2f2f2] py-2 px-4">
-                  Interest
-                </th>
-                <th className="border border-solid border-[#ddd] bg-[#f2f2f2] py-2 px-4">
-                  Principal
-                </th>
-                <th className="border border-solid border-[#ddd] bg-[#f2f2f2] py-2 px-4">
-                  Ending Balance
-                </th>
-                <th className="border border-solid border-[#ddd] bg-[#f2f2f2] py-2 px-4">
-                  Accumulated Paid Interest
-                </th>
-                <th className="border border-solid border-[#ddd] bg-[#f2f2f2] py-2 px-4">
-                  Accumulated Paid Principal
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {renderPaymentPlan()}
-              {renderYearlyTotals()}
-            </tbody>
-          </table>
+    <div className="mortgage-results flex flex-col flex-1">
+      <div className="flex">
+        <div className="results-container w-1/5">
+          {isCalculated && totalDownPayment !== null && (
+            <div className="mt-4 ">
+              <h3 className="text-md font-semibold">Total Down Payment:</h3>
+              <p className="text-md">${totalDownPayment.toFixed(2)}</p>
+            </div>
+          )}
+          {monthlyPayment !== null && (
+            <div className="mt-4">
+              <h3 className="text-md font-semibold">Monthly Payment:</h3>
+              <p className="text-md">${monthlyPayment.toFixed(2)}</p>
+            </div>
+          )}
+          {biWeeklyPayment !== null && (
+            <div className="mt-4">
+              <h3 className="text-md font-semibold">Bi-Weekly Payment:</h3>
+              <p className="text-md">${biWeeklyPayment.toFixed(2)}</p>
+            </div>
+          )}
+          {semiMonthlyPayment !== null && (
+            <div className="mt-4">
+              <h3 className="text-md font-semibold">Semi-Monthly Payment:</h3>
+              <p className="text-md">${semiMonthlyPayment.toFixed(2)}</p>
+            </div>
+          )}
+          {loanAmount !== null && (
+            <div className="mt-4">
+              <h3 className="text-md font-semibold">Loan Amount:</h3>
+              <p className="text-md">${loanAmount.toFixed(2)}</p>
+            </div>
+          )}
+          {totalPaidMortgage !== null && (
+            <div className="mt-4">
+              <h3 className="text-md font-semibold">Total Paid Mortgage:</h3>
+              <p className="text-md">${totalPaidMortgage.toFixed(2)}</p>
+            </div>
+          )}
+          {totalInterestPaid !== null && (
+            <div className="mt-4">
+              <h3 className="text-md font-semibold">Total Interest Paid:</h3>
+              <p className="text-md">${totalInterestPaid.toFixed(2)}</p>
+            </div>
+          )}
+          {provinceTax !== null && (
+            <div className="mt-4">
+              <h3 className="text-md font-semibold">Total Provincial Tax:</h3>
+              <p className="text-md">${provinceTax.toFixed(2)}</p>
+            </div>
+          )}
+          {cityTax !== null && (
+            <div className="mt-4">
+              <h3 className="text-md font-semibold">Total Municipal Tax:</h3>
+              <p className="text-md">${cityTax.toFixed(2)}</p>
+            </div>
+          )}
         </div>
-      )}
-      {graphData.length > 0 && <MortgageGraph GraphData={graphData} />}
+        <div className="payment-plan-container w-4/5">
+          {" "}
+          <div className="border border-solid justify-content-center text-center p-2">
+            <h3 className="text-lg font-bold mb-3">Payment Plan Options:</h3>
+            <button
+              onClick={() => calculatePayments("monthly")}
+              className="border border-solid p-2 mr-3 font-semibold hover:bg-blue-300  focus:bg-blue-400"
+            >
+              Monthly
+            </button>
+            <button
+              onClick={() => calculatePayments("semiMonthly")}
+              className="border border-solid p-2 mr-3 font-semibold hover:bg-blue-300  focus:bg-blue-400"
+            >
+              Semi-Monthly
+            </button>
+            <button
+              onClick={() => calculatePayments("biWeekly")}
+              className="border border-solid p-2 mr-3 font-semibold hover:bg-blue-300  focus:bg-blue-400"
+            >
+              Bi-Weekly
+            </button>
+          </div>
+          {renderPaymentPlan() !== null && (
+            <div>
+              <h3 className="text-right mt-2">
+                <button
+                  onClick={() => setCurrentYear(0)}
+                  disabled={currentYear === 0}
+                  className="border border-solid hover:bg-blue-300  active:bg-blue-400 mr-2 p-2"
+                >
+                  First
+                </button>
+                <button
+                  onClick={() => setCurrentYear(currentYear - 1)}
+                  disabled={currentYear === 0}
+                  className="border border-solid hover:bg-blue-300  active:bg-blue-400 mr-2 p-2"
+                >
+                  ←
+                </button>
+                Year {currentYear + 1} Payment Plan
+                <button
+                  onClick={() => setCurrentYear(currentYear + 1)}
+                  disabled={
+                    currentYear ===
+                    calculatePayments(selectedPaymentPlan).length - 1
+                  }
+                  className="border border-solid hover:bg-blue-300  active:bg-blue-400 ml-2 p-2"
+                >
+                  →
+                </button>
+                <button
+                  onClick={() =>
+                    setCurrentYear(
+                      calculatePayments(selectedPaymentPlan).length - 1
+                    )
+                  }
+                  disabled={
+                    currentYear ===
+                    calculatePayments(selectedPaymentPlan).length - 1
+                  }
+                  className="border border-solid hover:bg-blue-300  active:bg-blue-400 ml-2 p-2"
+                >
+                  Last
+                </button>
+              </h3>
+              <table className="payment-plan-table w-full mt-5 border-collapse">
+                <thead>
+                  <tr>
+                    <th className="border border-solid border-[#ddd] bg-[#f2f2f2] py-2 px-4">
+                      Index
+                    </th>
+                    <th className="border border-solid border-[#ddd] bg-[#f2f2f2] py-2 px-4">
+                      Date
+                    </th>
+                    <th className="border border-solid border-[#ddd] bg-[#f2f2f2] py-2 px-4">
+                      Interest
+                    </th>
+                    <th className="border border-solid border-[#ddd] bg-[#f2f2f2] py-2 px-4">
+                      Principal
+                    </th>
+                    <th className="border border-solid border-[#ddd] bg-[#f2f2f2] py-2 px-4">
+                      Ending Balance
+                    </th>
+                    <th className="border border-solid border-[#ddd] bg-[#f2f2f2] py-2 px-4">
+                      Accumulated Paid Interest
+                    </th>
+                    <th className="border border-solid border-[#ddd] bg-[#f2f2f2] py-2 px-4">
+                      Accumulated Paid Principal
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {renderPaymentPlan()}
+                  {renderYearlyTotals()}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+      </div>
+      <div className="graph-container mt-10">
+        {graphData.length > 0 && <MortgageGraph GraphData={graphData} />}
+      </div>
     </div>
   );
 };
