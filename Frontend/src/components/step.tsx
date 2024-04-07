@@ -79,15 +79,18 @@ const Steps: React.FC<StepProps> = ({
                   )}
                 </span>
               </div>
+              {index === currentStep && (
+                <span className="text-xs mt-2 text-center whitespace-wrap">
+                  {step.name}
+                </span>
+              )}
             </div>
-            <span className="text-xs mt-2 text-center whitespace-wrap">
-              {step.name}
-            </span>
             {index !== steps.length - 1 && (
               <div
-                className={`h-1 w-16 ${
+                className={`h-1 ${
                   index + 1 <= currentStep ? "bg-blue-500" : "bg-gray-300"
                 }`}
+                style={{ width: "100px" }}
               ></div>
             )}
           </React.Fragment>
