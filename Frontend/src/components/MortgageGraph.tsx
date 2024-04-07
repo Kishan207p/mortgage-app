@@ -18,12 +18,15 @@ interface GraphDataItem {
 
 interface MortgageChartProps {
   GraphData: GraphDataItem[];
+  pageType: string;
 }
 
-const MortgageGraph: React.FC<MortgageChartProps> = ({ GraphData }) => {
+const MortgageGraph: React.FC<MortgageChartProps> = ({ GraphData,pageType }) => {
+  const width = pageType === 'calculator' ? 1000 : 650;
   return (
+    
     <LineChart
-      width={600}
+      width={width}
       height={300}
       data={GraphData}
       margin={{ top: 20, right: 30, left: 20, bottom: 5 }}

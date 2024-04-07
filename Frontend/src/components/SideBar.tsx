@@ -6,6 +6,7 @@ import {
   HiMail,
   HiNewspaper,
   HiInformationCircle,
+  HiOutlineClipboardList
 } from "react-icons/hi";
 
 const SideBar = () => {
@@ -48,13 +49,14 @@ const SideBar = () => {
         <NavLink
           to="/comparison" // Added NavLink for "/comparison" here
           className={({ isActive }) =>
-            `flex items-center  px-4 py-2 ${
+            `flex items-center px-4 py-2 ${
               isActive
                 ? "bg-gray-800 text-gray-400"
                 : "text-white hover:bg-gray-800"
             }`
           }
         >
+          <HiOutlineClipboardList className="mr-2" />
           Comparison
         </NavLink>
         <NavLink
@@ -67,7 +69,7 @@ const SideBar = () => {
             }`
           }
         >
-          <HiDocument className="mr-2" /> Document
+          <HiDocument className="mr-2" /> Loan Progress
         </NavLink>
         <NavLink
           to="/contactus"

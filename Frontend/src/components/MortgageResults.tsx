@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import MortgageGraph from "./MortgageGraph";
 
+
 interface MortgageResultsProps {
   totalDownPayment: number | null;
   monthlyPayment: number | null;
@@ -45,6 +46,7 @@ interface MortgageResultsProps {
   isCalculated: boolean;
   provinceTax: number | null;
   cityTax: number | null;
+  pageType: "calculator" | "comparison";
 }
 
 interface PaymentPlan {
@@ -67,6 +69,7 @@ const MortgageResults: React.FC<MortgageResultsProps> = ({
   isCalculated,
   provinceTax,
   cityTax,
+  pageType,
 }) => {
   const [selectedPaymentPlan, setSelectedPaymentPlan] =
     useState<keyof PaymentPlan>("monthly");
@@ -219,67 +222,69 @@ const MortgageResults: React.FC<MortgageResultsProps> = ({
   // setSelectedPaymentPlan(frequency);
 
   return (
-    <div className="mortgage-results flex flex-col flex-1">
-      <div className="flex">
-        <div className="results-container w-1/5">
+    <div className={`mortgage-results flex flex-col flex-1 ${pageType === 'calculator' ? 'calculator-page' : 'comparison-page'}`}>
+      <div className={pageType === 'calculator' ? 'flex' : 'flex-col'}>
+      {totalDownPayment !== null && pageType == 'comparison' && (<div className="border mb-5"></div>)}
+        <div className={`results-container${pageType === 'calculator' ? 'flex w-1/4': 'flex justify-center mx-64 mb-7'}`}>
           {isCalculated && totalDownPayment !== null && (
             <div className="mt-4 ">
-              <h3 className="text-md font-semibold">Total Down Payment:</h3>
+              <h3 className="text-md font-bold">Total Down Payment:</h3>
               <p className="text-md">${totalDownPayment.toFixed(2)}</p>
             </div>
           )}
           {monthlyPayment !== null && (
             <div className="mt-4">
-              <h3 className="text-md font-semibold">Monthly Payment:</h3>
+              <h3 className="text-md font-bold">Monthly Payment:</h3>
               <p className="text-md">${monthlyPayment.toFixed(2)}</p>
             </div>
           )}
           {biWeeklyPayment !== null && (
             <div className="mt-4">
-              <h3 className="text-md font-semibold">Bi-Weekly Payment:</h3>
+              <h3 className="text-md font-bold">Bi-Weekly Payment:</h3>
               <p className="text-md">${biWeeklyPayment.toFixed(2)}</p>
             </div>
           )}
           {semiMonthlyPayment !== null && (
             <div className="mt-4">
-              <h3 className="text-md font-semibold">Semi-Monthly Payment:</h3>
+              <h3 className="text-md font-bold">Semi-Monthly Payment:</h3>
               <p className="text-md">${semiMonthlyPayment.toFixed(2)}</p>
             </div>
           )}
           {loanAmount !== null && (
             <div className="mt-4">
-              <h3 className="text-md font-semibold">Loan Amount:</h3>
+              <h3 className="text-md font-bold">Loan Amount:</h3>
               <p className="text-md">${loanAmount.toFixed(2)}</p>
             </div>
           )}
           {totalPaidMortgage !== null && (
             <div className="mt-4">
-              <h3 className="text-md font-semibold">Total Paid Mortgage:</h3>
+              <h3 className="text-md font-bold">Total Paid Mortgage:</h3>
               <p className="text-md">${totalPaidMortgage.toFixed(2)}</p>
             </div>
           )}
           {totalInterestPaid !== null && (
             <div className="mt-4">
-              <h3 className="text-md font-semibold">Total Interest Paid:</h3>
+              <h3 className="text-md font-bold">Total Interest Paid:</h3>
               <p className="text-md">${totalInterestPaid.toFixed(2)}</p>
             </div>
           )}
           {provinceTax !== null && (
             <div className="mt-4">
-              <h3 className="text-md font-semibold">Total Provincial Tax:</h3>
+              <h3 className="text-md font-bold">Total Provincial Tax:</h3>
               <p className="text-md">${provinceTax.toFixed(2)}</p>
             </div>
           )}
           {cityTax !== null && (
             <div className="mt-4">
-              <h3 className="text-md font-semibold">Total Municipal Tax:</h3>
+              <h3 className="text-md font-bold">Total Municipal Tax:</h3>
               <p className="text-md">${cityTax.toFixed(2)}</p>
             </div>
           )}
         </div>
-        <div className="payment-plan-container w-4/5">
-          <div className="border border-solid justify-content-center text-center p-2">
-            <h3 className="text-lg font-bold mb-3">Payment Plan Options:</h3>
+        <div className={pageType === 'calculator' ? '' : 'border mb-5'}></div>
+        <div className={`payment-plan-container${pageType === 'calculator' ? 'flex w-3/4':''}`}>
+          <div className="flex justify-center text-center p-2">
+            <h3 className="text-xl font-bold mr-10 mt-1">Payment Plan Options:</h3>
             <button
               onClick={() => calculatePayments("monthly")}
               className="border border-solid p-2 mr-3 font-semibold hover:bg-blue-300  focus:bg-blue-400"
@@ -299,6 +304,7 @@ const MortgageResults: React.FC<MortgageResultsProps> = ({
               Bi-Weekly
             </button>
           </div>
+          <hr className="my-6"/>
           {renderPaymentPlan() !== null && (
             <div>
               <h3 className="text-right mt-2">
@@ -377,9 +383,10 @@ const MortgageResults: React.FC<MortgageResultsProps> = ({
           )}
         </div>
       </div>
-      <div className="graph-container mt-10">
-        {graphData.length > 0 && <MortgageGraph GraphData={graphData} />}
-      </div>
+      {totalDownPayment !== null && (
+      <div className="graph-container mt-10 w-full p-4 border hover:bg-gray-200 border-gray-400 rounded-lg">
+        {graphData.length > 0 && <MortgageGraph GraphData={graphData} pageType={pageType} />}
+      </div>)}
     </div>
   );
 };

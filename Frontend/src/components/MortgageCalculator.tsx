@@ -475,12 +475,12 @@ const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({
   return (
     <div
       className={
-        pageContext === "calculator" ? "flex flex-col lg:flex-row" : "flex-col"
+        pageContext === "calculator" ? "flex flex-col lg:flex-row" : "flex-col justify-center items-center "
       }
     >
       <div
-        className={`border border-t-slate-500 border-t-4 border-gray-300 px-5 py-5 bg-slate-100 shadow-md ml-4 rounded-lg mb-10 ${
-          pageContext === "calculator" ? "lg:w-1/3 lg:mb-0" : "w-full"
+        className={`border border-t-slate-500 border-t-4 border-gray-300 px-5 py-5 bg-slate-100 shadow-md rounded-lg  ${
+          pageContext === "calculator" ? "lg:w-1/3 lg:mb-0 ml-4 mb-10" : "mx-20 mb-10"
         }`}
       >
         <div className="font-medium text-center text-lg mb-4">
@@ -525,8 +525,8 @@ const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({
       <div
         className={
           pageContext === "calculator"
-            ? "flex-grow mx-2 bg-slate-300 p-8"
-            : "w-full bg-green-200"
+            ? "flex-grow mx-2 p-8"
+            : "w-full"
         }
       >
         <div className="mortgage-results-container">
@@ -544,6 +544,7 @@ const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({
             isCalculated={isCalculated}
             provinceTax={provinceTax}
             cityTax={cityTax}
+            pageType={pageContext}
           />
           {isCalculated && (
             <>

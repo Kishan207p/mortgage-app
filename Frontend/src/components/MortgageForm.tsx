@@ -75,7 +75,7 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
   };
   return (
     <div className="font-medium font-sans">
-      <div className="w-full">
+      <div className="w-full mb-2">
         <label className="font-medium font-sans">Principal:</label>
         <input
           type="number"
@@ -90,7 +90,7 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
         />
       </div>
 
-      <div className="w-full">
+      <div className="w-full mb-2">
         <label>Interest Rate:</label>
         <input
           type="number"
@@ -105,7 +105,7 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
         />
       </div>
 
-      <div className="w-full">
+      <div className="w-full mb-2">
         <label>Loan Term:</label>
         <input
           type="number"
@@ -150,7 +150,7 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
         </div>
       </div> */}
 
-      <div className="flex mb-2">
+      <div className="flex mb-4">
         <div className="w-1/2 mr-2">
           <label className="block">Down Payment:</label>
           <div className="flex">
@@ -164,6 +164,7 @@ const MortgageForm: React.FC<MortgageFormProps> = ({
             />
           </div>
         </div>
+        
         <div className="w-1/2 ml-2">
           <label className="block">&nbsp;</label>
           <div className="flex">
