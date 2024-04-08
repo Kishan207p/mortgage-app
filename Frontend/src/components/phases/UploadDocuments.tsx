@@ -9,7 +9,11 @@ interface UploadDocumentsProps {
 const UploadDocuments: React.FC<UploadDocumentsProps> = () => {
   return (
     <div>
-      <PDFUpload />
+      <main className="w-full flex-grow">
+        <div className="container mx-auto px-2 py-8">
+          <PDFUpload />
+        </div>
+      </main>{" "}
     </div>
   );
 };
