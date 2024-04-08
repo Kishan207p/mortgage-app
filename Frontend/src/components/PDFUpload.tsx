@@ -191,8 +191,8 @@ const PDFUpload: React.FC<PDFUploadProps> = () => {
               <button
                 onClick={handleAddCard}
                 className="mt-4 mb-4 mr-4 p-4 bg-blue-500 text-white rounded-full focus:outline-none shadow-md focus:ring-2
-                     focus:ring-blue-300 rotate-on-hover "
-              >
+                     focus:ring-blue-300 rotate-on-hover"
+                  >
                 <FaPlus className="text-lg" />
               </button>
               <span className="absolute top-3 right-3 h-5 w-6 bg-white ring-[1.5px] ring-red-600 text-red-600 text-s font-semibold p-0 rounded-full">
@@ -296,13 +296,13 @@ const PDFUpload: React.FC<PDFUploadProps> = () => {
                     <div id={`file-container-${index}`}>
                       <span
                         id={`file-name-${index}`}
-                        className="w-auto pl-1 text-black font-semibold font-sans"
+                        className="w-auto  text-black font-semibold font-sans"
                       >
                         {pdf.fileName}
                       </span>
                     </div>
                     {pdf.isLoading && (
-                      <div className="w-2/3 mt-2 bg-gray-200 rounded-full h-3.2 overflow-hidden">
+                      <div className="w-2/3 mt-2 mr-2.5 shadow-md bg-gray-200 rounded-full h-3.2 overflow-hidden">
                         <div
                           className="bg-gray-700 h-3.2 text-xs font-medium text-white text-center p-0.5 leading-none"
                           style={{ width: `${pdf.uploadProgress}%` }}
