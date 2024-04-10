@@ -74,7 +74,8 @@ const DocumentPage: React.FC = () => {
 
   return (
     <>
-      <Header />
+      <div className="text-center font-bold text-3xl py-2 mb-2 pt-3 text-gray-600">Progress Page</div>
+      <div className="border mx-7 my-2"></div>
       <div className="container mx-auto px-2 py-8">
         <Steps
           currentStep={currentStep}
@@ -82,8 +83,9 @@ const DocumentPage: React.FC = () => {
           handleNext={handleNextStep}
           handlePrevious={handlePreviousStep}
         />
-
-        {renderCurrentStep()}
+        <div className="justify-center m-5 text-center">
+          {renderCurrentStep()}
+        </div>
 
         <div className="fixed bottom-4 right-4">
           <button

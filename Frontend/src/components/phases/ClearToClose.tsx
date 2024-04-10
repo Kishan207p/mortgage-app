@@ -8,7 +8,7 @@ interface ClearToCloseProps {
 const ClearToClose: React.FC<ClearToCloseProps> = () => {
   return (
     <div>
-      <h1>Clear to close</h1>
+      <h1 className="font-semibold text-xl">Clear to close</h1>
       {/* Add more JSX elements as needed */}
     </div>
   );

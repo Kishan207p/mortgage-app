@@ -8,7 +8,7 @@ interface CreateApplicationProps {
 const CreateApplication: React.FC<CreateApplicationProps> = () => {
   return (
     <div>
-      <h1>Create Application</h1>
+      <h1 className="font-semibold text-xl">Create Application</h1>
       {/* Add more JSX elements as needed */}
     </div>
   );

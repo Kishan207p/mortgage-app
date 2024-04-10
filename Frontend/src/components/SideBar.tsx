@@ -11,7 +11,7 @@ import {
 
 const SideBar = () => {
   return (
-    <div className="bg-gradient-to-b from-gray-800 to-gray-500 text-white h-full w-40 flex flex-col fixed top-0 left-0">
+    <div className="bg-gradient-to-b from-gray-800 to-gray-600 text-white h-full w-40 flex flex-col fixed top-0 left-0">
       <div className="p-4 items-center rounded-md md my-3 justify-center mx-3">
         <NavLink
           to="/"

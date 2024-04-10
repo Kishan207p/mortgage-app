@@ -8,7 +8,7 @@ interface LoanFundedProps {
 const LoanFunded: React.FC<LoanFundedProps> = () => {
   return (
     <div>
-      <h1>Loan Funded</h1>
+      <h1 className="font-semibold text-xl">Loan Funded</h1>
       {/* Add more JSX elements as needed */}
     </div>
   );

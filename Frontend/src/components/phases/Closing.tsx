@@ -8,7 +8,7 @@ interface ClosingProps {
 const Closing: React.FC<ClosingProps> = () => {
   return (
     <div>
-      <h1>Closing</h1>
+      <h1 className="font-semibold text-xl">Closing</h1>
       {
         
       }

@@ -8,7 +8,7 @@ interface LoanProcessingProps {
 const LoanProcessing: React.FC<LoanProcessingProps> = () => {
   return (
     <div>
-      <h1>Loan Processing</h1>
+      <h1 className="font-semibold text-xl">Loan Processing</h1>
       {/* Add more JSX elements as needed */}
     </div>
   );

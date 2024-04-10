@@ -8,7 +8,7 @@ interface ConditionallyApprovedProps {
 const ConditionallyApproved: React.FC<ConditionallyApprovedProps> = () => {
   return (
     <div>
-      <h1>Conditionally Approved</h1>
+      <h1 className="font-semibold text-xl">Conditionally Approved</h1>
       {/* Add more JSX elements as needed */}
     </div>
   );

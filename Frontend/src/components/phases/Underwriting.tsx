@@ -8,7 +8,7 @@ interface UnderwritingProps {
 const Underwriting: React.FC<UnderwritingProps> = () => {
   return (
     <div>
-      <h1>Underwritting</h1>
+      <h1 className="font-semibold text-xl">Underwritting</h1>
       {/* Add more JSX elements as needed */}
     </div>
   );
